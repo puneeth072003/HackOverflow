@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const Mongo_connect = async (app) => {
   try {
     const uri =
-      "mongodb+srv://Puneeth:Lta02vWcfdBvLmq4@cluster0.cbqhspg.mongodb.net/";
+      "####################################";
     await mongoose.connect(uri);
     console.log("Connected to MongoDB...");
   } catch (error) {
