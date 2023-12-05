@@ -6,6 +6,7 @@ main::after {
 /*  */
 
 form {
+  width: 35vw;
   background-color: rgba(0, 0, 0, 0.127);
   border: 1px solid #ff007a;
   border-top: 4px solid #ff007a;
@@ -70,9 +71,26 @@ button:hover {
     content: '';
 } */
 
-@media (max-width: 480px) {
+@media (width<1150px) {
   form {
-    width: 100%;
-    max-width: 300px;
+    width: 65vw;
+  }
+}
+
+@media (width<530px) {
+  form {
+    width: 70vw;
+  }
+}
+
+@media (width<430px) {
+  form {
+    width: 80vw;
+  }
+}
+
+@media (width<350px) {
+  form {
+    width: 90vw;
   }
 }

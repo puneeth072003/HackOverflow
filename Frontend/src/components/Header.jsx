@@ -5,12 +5,12 @@ import "../styles/Header.css";
 export const Header = () => {
   return (
     <>
-      <header className="flex justify-between content-center px-[1.5rem]">
+      <header className="flex justify-between content-center px-[1.5rem] flex-wrap">
         <div>
           <img src={logo} className="w-[5rem]" alt="logo" />
         </div>
         <nav className="flex justify-between content-center">
-          <ul className="flex justify-center gap-[1.5rem] text-base content-center flex-wrap">
+          <ul className="flex justify-center gap-[1.5rem] text-base content-center">
             <li className="text-3xl text-[#FF007A]">
               <Link to={"/"}>Home</Link>
             </li>
