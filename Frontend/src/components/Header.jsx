@@ -12,11 +12,13 @@ export const Header = () => {
           <img src={logo} className="w-[5rem]" alt="logo" />
         </div>
         <nav className="flex justify-between content-center">
-          <ul className="flex justify-center gap-[1.5rem] text-base content-center">
-            <li className="text-3xl text-[#FF007A]">
+          <ul className="flex justify-center gap-[1.5rem] text-base content-center flex-wrap">
+            <li className="text-3xl text-[#fff]">
               <NavLink to={"/"}>
                 <FontAwesomeIcon icon={faHome} />
               </NavLink>
+            </li>
+            <li className="text-3xl text-[#fff]">
               <NavLink to={"/login"}>
                 <FontAwesomeIcon icon={faUser} />
               </NavLink>
