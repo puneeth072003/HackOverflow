@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome, faUser } from "@fortawesome/free-solid-svg-icons";
 import logo from "../assets/temp.png";
 import "../styles/Header.css";
 
@@ -12,10 +14,12 @@ export const Header = () => {
         <nav className="flex justify-between content-center">
           <ul className="flex justify-center gap-[1.5rem] text-base content-center">
             <li className="text-3xl text-[#FF007A]">
-              <Link to={"/"}>Home</Link>
-            </li>
-            <li className="text-3xl text-[#FF007A]">
-              <Link to={"/login"}>Login</Link>
+              <NavLink to={"/"}>
+                <FontAwesomeIcon icon={faHome} />
+              </NavLink>
+              <NavLink to={"/login"}>
+                <FontAwesomeIcon icon={faUser} />
+              </NavLink>
             </li>
           </ul>
         </nav>
@@ -24,4 +28,4 @@ export const Header = () => {
   );
 };
 
-export default Header
+export default Header;
