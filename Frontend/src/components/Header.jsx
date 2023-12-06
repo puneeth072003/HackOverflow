@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faUser, faVideo } from "@fortawesome/free-solid-svg-icons";
 import logo from "../assets/temp.png";
 import "../styles/Header.css";
 
@@ -21,6 +21,11 @@ export const Header = () => {
             <li className="text-3xl text-[#fff]">
               <NavLink to={"/login"}>
                 <FontAwesomeIcon icon={faUser} />
+              </NavLink>
+            </li>
+            <li className="text-3xl text-[#fff]">
+              <NavLink to={"/upload"}>
+                <FontAwesomeIcon icon={faVideo} />
               </NavLink>
             </li>
           </ul>
