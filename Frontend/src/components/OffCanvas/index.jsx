@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 import Header from "../Header";
+import Footer from "../Footer";
 import PermanentDrawer from "../PermanentDrawer";
 
 const drawerWidth = 250;
@@ -143,6 +144,7 @@ export default function MiniDrawer() {
         <DrawerHeader />
         <PermanentDrawer></PermanentDrawer>
         Video Convertor here??
+        {/* <Footer></Footer> */}
       </Box>
     </Box>
   );
