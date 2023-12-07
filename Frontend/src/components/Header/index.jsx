@@ -6,17 +6,17 @@ import {
   faVideo,
   faCalendar,
 } from "@fortawesome/free-solid-svg-icons";
-import logo from "../assets/temp.png";
-import "../styles/Header.css";
+import logo from "../../assets/logo.png";
+import "./style.css";
 
 export const Header = () => {
   return (
     <>
-      <header className="flex justify-between content-center px-[1.5rem] flex-wrap">
+      <header className="flex justify-between content-center flex-wrap">
         <div>
-          <img src={logo} className="w-[5rem]" alt="logo" />
+          <img src={logo} className="w-[10rem]" alt="logo" />
         </div>
-        <nav className="flex justify-between content-center">
+        {/* <nav className="flex justify-between content-center">
           <ul className="flex justify-center gap-[2rem] text-base content-center flex-wrap">
             <li className="text-3xl text-[#fff]">
               <NavLink to={"/"}>
@@ -39,7 +39,7 @@ export const Header = () => {
               </NavLink>
             </li>
           </ul>
-        </nav>
+        </nav> */}
       </header>
     </>
   );
