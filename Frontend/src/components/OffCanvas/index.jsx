@@ -112,12 +112,12 @@ export default function MiniDrawer() {
         position="fixed"
         open={open}
         sx={{
-          backgroundColor: "transparent",
+          backgroundColor: "rgba(0, 0, 0, 0.07)",
           boxShadow: "0px 2px 3px -1px rgb(255 255 255/ 20%)",
           borderRadius: "7px",
         }}
       >
-        <Toolbar sx={{ backgroundColor: "transparent" }}>
+        <Toolbar sx={{ backgroundColor: "rgba(0, 0, 0, 0.07)" }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -138,7 +138,7 @@ export default function MiniDrawer() {
         sx={{
           "& .MuiPaper-root": {
             display: open ? "" : "none",
-            backgroundColor: "transparent",
+            backgroundColor: "rgba(0, 0, 0, 0.07)",
             transition: "box-shadow 0s cubic-bezier(0.4, 0, 0.6, 1) 225ms",
             boxShadow: "2px 0px 3px -1px rgb(255 255 255/ 20%)",
           },
