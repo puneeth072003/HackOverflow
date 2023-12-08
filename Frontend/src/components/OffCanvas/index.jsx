@@ -11,10 +11,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 import Header from "../Header";
-import Footer from "../Footer";
+// import Footer from "../Footer";
 import PermanentDrawer from "../PermanentDrawer";
+import Profile from "../Profile";
+import { createTheme } from "@mui/material/styles";
 
-const drawerWidth = 250;
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#FF007A",
+    },
+    secondary: {
+      main: "#fff",
+    },
+  },
+});
+
+const drawerWidth = 280;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -95,6 +108,7 @@ export default function MiniDrawer() {
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar
+        theme={theme}
         position="fixed"
         open={open}
         sx={{
@@ -120,6 +134,7 @@ export default function MiniDrawer() {
         </Toolbar>
       </AppBar>
       <Drawer
+        theme={theme}
         sx={{
           "& .MuiPaper-root": {
             display: open ? "" : "none",
@@ -131,20 +146,28 @@ export default function MiniDrawer() {
         variant="permanent"
         open={open}
       >
-        <DrawerHeader>
+        <DrawerHeader theme={theme}>
           <IconButton onClick={handleDrawerClose}>
             <FontAwesomeIcon icon={faChevronLeft} color="#fff" />
           </IconButton>
         </DrawerHeader>
         <Divider sx={{ "border-color": "#313942" }} />
-        Login Info???
+        <Profile />
         <Divider sx={{ "border-color": "#313942" }} />
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, marginTop: "25px" }}>
         <DrawerHeader />
-        <PermanentDrawer></PermanentDrawer>
-        Video Convertor here??
-        {/* <Footer></Footer> */}
+        <PermanentDrawer />
+        <div
+          style={{ border: "2px solid red" }}
+          className={
+            open
+              ? "absolute w-[56vw] h-[85vh] left-[20vw]"
+              : "absolute w-[72vw] h-[85vh] left-[35px]"
+          }
+        >
+          {/* <Footer></Footer> */}
+        </div>
       </Box>
     </Box>
   );

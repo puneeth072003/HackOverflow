@@ -4,11 +4,13 @@ import dayjs from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { useState } from "react";
+import './style.css'
 
 const drawerWidth = 350;
 
-const custom_style = {
+const calender_style = {
   "& span, button, div": { color: "#fff" },
   "& button.Mui-selected": { "background-color": "#FF007A" },
   "& button.Mui-selected:hover": {
@@ -34,10 +36,40 @@ const custom_style = {
   },
 };
 
-export default function PermanentDrawer() {
-  const [value, setValue] = useState(dayjs("2023-12-07"));
+const time_style = {
+  marginLeft: "1rem",
+  marginRight: "1rem",
+  marginBottom: "2rem",
+  border: "none",
+  "input, svg": {
+    color: "#fff",
+  },
+  "input": {
+    padding: "16.5px 14px"
+  },
+  "& button MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1e6y48t-MuiButtonBase-root-MuiButton-root": {
+    color: "#FF007A"
+  },
+  "& .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline":
+    {
+      "border-color": "#FF007A",
+    },
+  "& .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+    {
+      "border-color": "#FF007A",
+      "border-width": "2px",
+    },
+  "& .MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline":
+    {
+      "border-color": "#FF007A",
+      "border-width": "2px",
+    },
+};
 
-  console.log(value);
+export default function PermanentDrawer() {
+  const [date, setDate] = useState(dayjs(""));
+  const [time, setTime] = useState(dayjs(""));
+
   return (
     <Drawer
       sx={{
@@ -60,15 +92,25 @@ export default function PermanentDrawer() {
       </h1>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DateCalendar
-          value={value}
-          onChange={(newValue) => setValue(newValue)}
-          sx={custom_style}
+          value={date}
+          onChange={(newDate) => setDate(newDate)}
+          sx={calender_style}
+        />
+        <TimePicker
+          label=""
+          value={time}
+          onChange={(newTime) => setTime(newTime)}
+          sx={time_style}
         />
       </LocalizationProvider>
+      <button
+              // onClick={postData}
+              data-function="post-date-time"
+              className="font-['Cairo'] py-[0.5rem] text-[1.2rem] rounded-[14px] bg-[#FF007A] w-[10rem] mx-[auto] mb-[2rem]"
+            >
+              Create Meeting
+            </button>
       <Divider sx={{ "border-color": "#313942" }} />
-      <h1 className="text-center text-[#FF007A] font-['Cairo'] text-[1.4rem] py-[1rem] font-[1000]">
-        No Events Yet
-      </h1>
     </Drawer>
   );
 }
