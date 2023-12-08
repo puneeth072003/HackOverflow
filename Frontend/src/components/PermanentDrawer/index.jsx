@@ -64,6 +64,16 @@ const time_style = {
       "border-color": "#FF007A",
       "border-width": "2px",
     },
+  "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline":
+    {
+      "border-color": "#FF007A",
+      "border-width": "2px",
+    },
+  "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline:hover":
+    {
+      "border-color": "#FF007A",
+      "border-width": "2px",
+    },
 };
 
 export default function PermanentDrawer() {
