@@ -14,7 +14,7 @@ import Header from "../Header";
 // import Footer from "../Footer";
 import PermanentDrawer from "../PermanentDrawer";
 import Profile from "../Profile";
-import MidPage from "../MidPage";
+import Schedules from "../Schedules";
 
 // import PropTypes from 'prop-types';
 
@@ -169,7 +169,7 @@ export default function MiniDrawer() {
               : "absolute w-[72vw] h-[85vh] left-[35px] pr-0"
           }
         >
-          <MidPage large={open} />
+          <Schedules large={open} />
         </main>
       </Box>
     </Box>
