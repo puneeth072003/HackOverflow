@@ -25,7 +25,11 @@ export const Login = () => {
   return (
     <>
       <main className="flex justify-center content-center flex-col gap-[3rem] flex-wrap">
-        <img src={logo} alt="" className="w-[15rem] justify-self-center self-center" />
+        <img
+          src={logo}
+          alt=""
+          className="w-[15rem] justify-self-center self-center"
+        />
         <h1 className="font-['Cairo'] text-center text-[2rem] font-bold text-[#FF007A]">
           LOGIN TO CONTINUE
         </h1>
@@ -40,6 +44,7 @@ export const Login = () => {
               Username:
             </label>
             <input
+              data-function="fetch-username"
               value={username}
               onChange={(event) => setUsername(event.target.value)}
               type="text"
@@ -51,6 +56,7 @@ export const Login = () => {
               Password:
             </label>
             <input
+              data-function="fetch-password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               type="password"
