@@ -127,9 +127,6 @@ export default function PermanentDrawer() {
       <h1 className="text-center text-[#FF007A] font-['Cairo'] text-[1.4rem] py-[1rem] font-[1000]">
         Setup your Meeting
       </h1>
-      {/* <label className="text-[1.2rem] text-[#FF007A]" htmlFor="username">
-        Username:
-      </label> */}
       <input
         required
         value={event}

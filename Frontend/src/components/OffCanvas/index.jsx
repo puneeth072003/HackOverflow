@@ -14,6 +14,10 @@ import Header from "../Header";
 // import Footer from "../Footer";
 import PermanentDrawer from "../PermanentDrawer";
 import Profile from "../Profile";
+import MidPage from "../MidPage";
+
+// import PropTypes from 'prop-types';
+
 import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
@@ -158,16 +162,15 @@ export default function MiniDrawer() {
       <Box component="main" sx={{ flexGrow: 1, marginTop: "25px" }}>
         <DrawerHeader />
         <PermanentDrawer />
-        <div
-          style={{ border: "2px solid red" }}
+        <main
           className={
             open
-              ? "absolute w-[56vw] h-[85vh] left-[20vw]"
-              : "absolute w-[72vw] h-[85vh] left-[35px]"
+              ? "absolute w-[56vw] h-[85vh] left-[20vw] pr-[1.5rem]"
+              : "absolute w-[72vw] h-[85vh] left-[35px] pr-0"
           }
         >
-          {/* <Footer></Footer> */}
-        </div>
+          <MidPage large={open} />
+        </main>
       </Box>
     </Box>
   );
