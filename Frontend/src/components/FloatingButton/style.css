@@ -1,6 +1,9 @@
 button.MuiFab-root {
     background-color: #ff007a;
 }
+button.MuiFab-root:hover {
+    background-color: #ff007a;
+}
 
 svg[data-icon=plus] path {
     fill: #fff;

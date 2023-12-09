@@ -105,8 +105,6 @@ export default function PermanentDrawer() {
     console.log(data);
   };
 
-  postData(0);
-
   return (
     <Drawer
       sx={{
