@@ -155,7 +155,7 @@ export default function PermanentDrawer() {
         />
       </LocalizationProvider>
       <button
-        // onClick={postData}
+        onClick={postData}
         data-function="post-date-time"
         className="font-['Cairo'] py-[0.5rem] text-[1.2rem] rounded-[14px] bg-[#FF007A] w-[10rem] mx-[auto] mb-[2rem]"
       >
