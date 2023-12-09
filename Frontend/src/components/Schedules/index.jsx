@@ -1,8 +1,15 @@
 import dayjs from "dayjs";
+import { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
+import { BACKEND_URI } from "../../config";
 
-// eslint-disable-next-line react/prop-types
 const Schedules = () => {
+  useEffect(() => {
+    fetch(`${BACKEND_URI}/api/v1/updateCalendar`).then((res) =>
+      console.log(res)
+    );
+  });
+
   const getDate = dayjs(new Date());
 
   function getDay(i) {
@@ -33,7 +40,7 @@ const Schedules = () => {
     ][i];
   }
 
-  const obj = useOutletContext()
+  const obj = useOutletContext();
 
   return (
     <>
@@ -46,7 +53,6 @@ const Schedules = () => {
             Today
           </h3>
           <hr
-            // eslint-disable-next-line react/prop-types
             className="border-[#313942]"
             style={{ width: obj.large ? "38vw" : "55vw" }}
           />
@@ -55,13 +61,11 @@ const Schedules = () => {
               {getMonth(getDate.month())} {getDate.date()}, {getDate.year()}
             </h3>
             <h3 className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200]">
-              {getDay((getDate.day())%7)}
+              {getDay(getDate.day() % 7)}
             </h3>
           </div>
         </div>
-        <div className="h-[30vh]">
-          {/* Meeting INFO */}
-        </div>
+        <div className="h-[30vh]">{/* Meeting INFO */}</div>
       </div>
       <div>
         <div className="flex justify-between items-center">
@@ -75,16 +79,14 @@ const Schedules = () => {
           />
           <div className="flex flex-col justify-center items-end">
             <h3 className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200]">
-              {getMonth(getDate.month())} {getDate.date()+1}, {getDate.year()}
+              {getMonth(getDate.month())} {getDate.date() + 1}, {getDate.year()}
             </h3>
             <h3 className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200]">
-              {getDay((getDate.day()+1)%7)}
+              {getDay((getDate.day() + 1) % 7)}
             </h3>
           </div>
         </div>
-        <div className="h-[20vh]">
-          {/* Meeting INFO */}
-        </div>
+        <div className="h-[20vh]">{/* Meeting INFO */}</div>
       </div>
     </>
   );
