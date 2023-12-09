@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import axios from "axios";
 import "./style.css";
 
 export const Login = () => {
@@ -17,7 +18,21 @@ export const Login = () => {
     setAuth(true);
     return;
   }
+  // ################################################
+  const url = "http://localhost:3500/api/v1/login";
 
+  const handleLogin = async () => {
+    try {
+      const response = await axios.get(url);
+      if (response.data.redirectUrl) {
+        window.location.href = response.data.redirectUrl;
+      }
+    } catch (error) {
+      console.error("Error in login:", error);
+    }
+  };
+
+  // ################################################
   useEffect(() => {
     auth && navigate("/home");
   }, [auth, navigate]);
@@ -49,6 +64,7 @@ export const Login = () => {
               onChange={(event) => setUsername(event.target.value)}
               type="text"
               name="username"
+              id="username"
             />
           </div>
           <div className="px-[1.5rem] flex justify-center content-center gap-[1.2rem] flex-wrap">
@@ -61,6 +77,7 @@ export const Login = () => {
               onChange={(event) => setPassword(event.target.value)}
               type="password"
               name="password"
+              id="password"
             />
           </div>
           <div className="button-holder flex justify-center flex-col content-center gap-[1.5rem] flex-wrap">
@@ -73,6 +90,7 @@ export const Login = () => {
             </button>
             <button
               data-function="google-auth"
+              onClick={handleLogin}
               className="font-['Cairo'] py-[0.5rem] px-[1.2rem] text-[1rem] text-[#ccc]"
             >
               LOGIN WITH GOOGLE

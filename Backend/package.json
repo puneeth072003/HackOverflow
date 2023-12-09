@@ -19,6 +19,8 @@
     "express-session": "^1.17.3",
     "ffmpeg": "^0.0.4",
     "fluent-ffmpeg": "^2.1.2",
+    "google-auth-library": "^8.6.0",
+    "googleapis": "^58.0.0",
     "mongoose": "^8.0.2",
     "multer": "^1.4.5-lts.1",
     "nodemon": "^3.0.2",
