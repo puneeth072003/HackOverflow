@@ -1,3 +1,7 @@
+import axios from "axios";
+
+import { BACKEND_URI } from "../../config";
+
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -10,6 +14,27 @@ import { FileUploader } from "react-drag-drop-files";
 
 import "./style.css";
 
+const style = {
+  position: "absolute",
+  width: "45vw",
+  height: "80vh",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "#17202a",
+  border: "1px solid rgb(255 255 255/ 20%)",
+  borderRadius: "15px",
+  boxShadow: 24,
+  p: 0,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: "1.5rem",
+  "&::before, &::after": {
+    content: '""',
+  },
+};
+
 const CustomModal = () => {
   const [open, setOpen] = useState(false);
 
@@ -21,28 +46,19 @@ const CustomModal = () => {
 
   const handleChange = (file) => setFile(file);
 
-  // Not Tested
-  console.log(file)
+  const postData = (e) => {
+    e.preventDefault();
 
-  const style = {
-    position: "absolute",
-    width: "45vw",
-    height: "70vh",
-    top: "54%",
-    left: "48%",
-    transform: "translate(-50%, -50%)",
-    bgcolor: "#17202a",
-    border: "1px solid rgb(255 255 255/ 20%)",
-    borderRadius: "15px",
-    boxShadow: 24,
-    p: 0,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "1.5rem",
-    "&::before, &::after": {
-      content: '""',
-    },
+    if (file === null) return;
+
+    let formData = new FormData();
+    formData.append("videos", file);
+    formData.append("videos", file);
+
+    axios
+      .post(`${BACKEND_URI}/api/v1/create`, formData)
+      .then((success) => alert("Done"))
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -74,18 +90,30 @@ const CustomModal = () => {
           />
           <div className="w-[100%]">
             <h2 className="font-['Cairo'] text-[#ff007a] text-[2rem] text-center">
-              Transcribe your Recorded Meetings
+              Transcribe your Meetings
             </h2>
             <Divider sx={{ "border-color": "#313942" }} />
           </div>
           <div>
-            <p className="text-center">Supported Files: <em className="text-[#ff007a] font-[1000]">.mkv</em> & <em className="text-[#ff007a] font-[1000]">.mp4</em></p>
+            <p className="text-center">
+              Supported Files:{" "}
+              <em className="text-[#ff007a] font-[1000]">.mp4</em>
+            </p>
             <FileUploader
               handleChange={handleChange}
               name="file"
-              types={["MKV", "MP4"]}
-              label=' Upload or Drop a File Right Here'
+              types={["MP4"]}
+              label=" Upload or Drop a File Right Here"
             />
+          </div>
+          <div>
+            <button
+              onClick={postData}
+              data-function="post-video"
+              className="font-['Cairo'] py-[0.5rem] text-[1.2rem] rounded-[14px] bg-[#FF007A] w-[7rem] mx-[auto] mb-[2rem] text-[#000]"
+            >
+              Upload
+            </button>
           </div>
         </Box>
       </Modal>

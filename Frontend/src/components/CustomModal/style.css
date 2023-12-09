@@ -7,7 +7,7 @@ label.guZdik {
   height: 20rem;
   width: 28vw;
   border: 2px dashed rgb(255 255 255/ 50%);
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 
 .file-types {
@@ -27,4 +27,12 @@ svg[data-icon=xmark] path{
 div.sc-eqUAAy, span.sc-fqkvVR {
     height: 1rem;
     flex-grow: unset;
+}
+
+span.kFhUBM span {
+  text-decoration: none;
+}
+
+button[data-function="post-video"]:active {
+  box-shadow: 0 0 10px #ff007a;
 }
