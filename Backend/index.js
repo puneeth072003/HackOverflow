@@ -23,8 +23,48 @@ mongo();
 
 app.use(express.json());
 app.use("/api/v1/", router);
+
+// ################################################
+// File download
+const multer = require("multer");
+const path = require("path");
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "Assets");
+  },
+  filename: (req, file, cb) => {
+    cb(null, "input.mp4");
+  },
+});
+
+const upload = multer({
+  storage: storage,
+  fileFilter: (req, file, cb) => {
+    const ext = path.extname(file.originalname);
+
+    if (ext !== ".mp4") {
+      return cb(new Error("Wrong File"));
+    }
+  },
+});
+
+app.post(
+  "/api/v1/upload",
+  upload.fields([
+    {
+      name: "videos",
+      maxCount: 1,
+    },
+  ]),
+  (req, res) => {
+    res.send("Welcome to your Upload!");
+  }
+);
+
 // ################################################
 // passport.js
+
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const session = require("express-session");
