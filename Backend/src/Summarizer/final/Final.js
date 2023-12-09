@@ -23,9 +23,11 @@ const Final = async (req, res) => {
       // Handle the error if extraction fails
       console.error("transcription failed:", error);
     });
+  payload = "";
   Final_Summary = await F3()
     .then((outputFilePath) => {
       // Use the output file path or perform further actions
+      payload = outputFilePath;
       console.log("Final Summary:", outputFilePath);
     })
     .catch((error) => {
@@ -35,9 +37,9 @@ const Final = async (req, res) => {
 
   const endTime = new Date();
   const executionTime = (endTime - startTime) / (1000 * 60);
-  res.send({
-    summary: Final_Summary,
-    executionTime: executionTime + "mins", // Sending the final summary and execution time in milliseconds
+  res.json({
+    summary: payload,
+    executionTime: executionTime + "mins",
   });
 };
 module.exports = Final;

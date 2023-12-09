@@ -21,7 +21,7 @@ const mongo = async () => {
 };
 mongo();
 
-app.use(express.json());
+app.use(express.json({ limit: "100mb" }));
 app.use("/api/v1/", router);
 
 // ################################################
