@@ -46,19 +46,24 @@ const CustomModal = () => {
 
   const handleChange = (file) => setFile(file);
 
-  const postData = (e) => {
+  const postData = async (e) => {
     e.preventDefault();
 
-    if (file === null) return;
+    if (file === null) {
+      console.error("No file selected");
+      return;
+    }
 
     let formData = new FormData();
     formData.append("videos", file);
-    formData.append("videos", file);
 
-    axios
-      .post(`${BACKEND_URI}/api/v1/create`, formData)
-      .then((success) => alert("Done"))
-      .catch((error) => console.log(error));
+    try {
+      const response = await axios.post(`${BACKEND_URI}/upload`, formData);
+      console.log("Upload successful", response.data);
+    } catch (error) {
+      console.error("Error uploading file", error);
+
+    }
   };
 
   return (
