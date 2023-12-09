@@ -31,6 +31,10 @@ const calender_style = {
     {
       "background-color": "#FF007A",
     },
+  "& button.css-1u23akw-MuiButtonBase-root-MuiPickersDay-root:focus":
+    {
+      "background-color": "#FF007A",
+    },
   "& button.css-innj4t-MuiPickersYear-yearButton.Mui-selected": {
     "background-color": "#FF007A",
   },
@@ -76,9 +80,11 @@ const time_style = {
 };
 
 export default function PermanentDrawer() {
-  const [date, setDate] = useState(dayjs(""));
+  const [date, setDate] = useState(dayjs("2023-12-09"));
   const [time, setTime] = useState(dayjs(""));
   const [event, setEvent] = useState("");
+
+console.log(date)
 
   return (
     <Drawer
