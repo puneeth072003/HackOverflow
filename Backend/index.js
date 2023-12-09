@@ -1,5 +1,5 @@
 const express = require("express");
-// const cors = require("cors");
+const cors = require("cors");
 const router = require("./src/Router/Route");
 const {
   User,
@@ -9,12 +9,12 @@ const {
 } = require("./src/userModel");
 const app = express();
 
-// const corsOptions = {
-//   origin: "http://localhost:5173",
-//   credentials: true,
-// };
+const corsOptions = {
+  origin: "*",
+  credentials: true,
+};
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 const mongo = async () => {
   await Mongo_connect(app);
