@@ -1,7 +1,8 @@
 import dayjs from "dayjs";
+import { useOutletContext } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
-const Schedules = ({ large }) => {
+const Schedules = () => {
   const getDate = dayjs(new Date());
 
   function getDay(i) {
@@ -32,6 +33,8 @@ const Schedules = ({ large }) => {
     ][i];
   }
 
+  const obj = useOutletContext()
+
   return (
     <>
       <h1 className="text-center text-[#FF007A] font-['Cairo'] text-[2.5rem] py-[1rem] font-[600]">
@@ -45,7 +48,7 @@ const Schedules = ({ large }) => {
           <hr
             // eslint-disable-next-line react/prop-types
             className="border-[#313942]"
-            style={{ width: large ? "38vw" : "55vw" }}
+            style={{ width: obj.large ? "38vw" : "55vw" }}
           />
           <div className="flex flex-col justify-center items-end">
             <h3 className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200]">
@@ -68,7 +71,7 @@ const Schedules = ({ large }) => {
           <hr
             // eslint-disable-next-line react/prop-types
             className="border-[#313942]"
-            style={{ width: large ? "35vw" : "52vw" }}
+            style={{ width: obj.large ? "35vw" : "52vw" }}
           />
           <div className="flex flex-col justify-center items-end">
             <h3 className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200]">
@@ -79,7 +82,7 @@ const Schedules = ({ large }) => {
             </h3>
           </div>
         </div>
-        <div className="h-[30vh]">
+        <div className="h-[20vh]">
           {/* Meeting INFO */}
         </div>
       </div>

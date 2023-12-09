@@ -11,14 +11,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 import Header from "../Header";
-// import Footer from "../Footer";
 import PermanentDrawer from "../PermanentDrawer";
 import Profile from "../Profile";
-import Schedules from "../Schedules";
-
-// import PropTypes from 'prop-types';
+import FloatingButton from "../FloatingButton";
+import NavBar from "../NavBar";
 
 import { createTheme } from "@mui/material/styles";
+import { Outlet } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -158,6 +157,8 @@ export default function MiniDrawer() {
         <Divider sx={{ "border-color": "#313942" }} />
         <Profile />
         <Divider sx={{ "border-color": "#313942" }} />
+        <NavBar />
+        <Divider sx={{ "border-color": "#313942" }} />
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, marginTop: "25px" }}>
         <DrawerHeader />
@@ -169,7 +170,10 @@ export default function MiniDrawer() {
               : "absolute w-[72vw] h-[85vh] left-[35px] pr-0"
           }
         >
-          <Schedules large={open} />
+          <Outlet context={{ large: open }} />
+          <div className="absolute right-2 bottom-3">
+            <FloatingButton />
+          </div>
         </main>
       </Box>
     </Box>
