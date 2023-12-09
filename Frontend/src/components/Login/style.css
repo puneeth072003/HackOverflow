@@ -5,7 +5,7 @@ main::after {
 
 /*  */
 
-form {
+section[data-function=form] {
   width: 35vw;
   background-color: rgba(0, 0, 0, 0.127);
   border: 1px solid #ff007a;
@@ -13,8 +13,8 @@ form {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-form::before,
-form::after {
+section[data-function=form]::before,
+section[data-function=form]::after {
   content: "";
 }
 
@@ -35,31 +35,30 @@ input:focus {
   border-bottom: 1px solid #fff;
 }
 
-button[type=submit] {
+button[data-function=login] {
   color: #ff007a;
   border: 2px solid #ff007a;
   transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
 }
 
-button[type=submit]:hover {
+button[data-function=submit]:hover {
     border-radius: 5px;
   background-color: #ff007a;
   color: #17202a;
   box-shadow: none;
 }
 
-button[type=submit]:active {
+button[data-function=submit]:active {
   box-shadow: 0 0 10px #ff007a;
 }
 
-button {
+button[data-function=google-auth] {
   color: #ccc;
   border: 2px solid #ccc;
   transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
-  padding: 0 2rem;
 }
 
-button:hover {
+button[data-function=google-auth]:hover {
     border-radius: 5px;
   background-color: #ccc;
   color: #000;
