@@ -1,16 +1,34 @@
 import dayjs from "dayjs";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { BACKEND_URI } from "../../config";
 
 const Schedules = () => {
+  const [events, setEvents] = useState([]);
   useEffect(() => {
-    fetch(`${BACKEND_URI}/api/v1/updateCalendar`).then((res) =>
-      console.log(res)
-    );
-  });
+    fetch(`${BACKEND_URI}/api/v1/updateCalendar`)
+      .then((res) => res.json())
+      .then((data) => setEvents(data));
+  }, []);
 
   const getDate = dayjs(new Date());
+
+  const today = [];
+  const tom = [];
+
+  events.forEach((e) => {
+    const str = e.startDateTime.substring(0, 10);
+    if (
+      str ===
+      getDate.year() + "-" + (getDate.month() + 1) + "-" + getDate.date()
+    )
+      today.push(e);
+    if (
+      str ===
+      getDate.year() + "-" + (getDate.month() + 1) + "-" + (getDate.date() + 1)
+    )
+      tom.push(e);
+  });
 
   function getDay(i) {
     return [
@@ -65,9 +83,30 @@ const Schedules = () => {
             </h3>
           </div>
         </div>
-        <div className="h-[30vh]">{/* Meeting INFO */}</div>
+        <div className="m-[1.5rem] flex justify-start items-start gap-[2rem]">
+          <div className="flex flex-col justify-start gap-[1rem] p-[0rem]">
+            <h3 className="text-[#FF007A] font-['Cairo'] text-[1.5rem] font-[200]">
+              Time
+            </h3>
+            <h3 className="text-[#FF007A] font-['Cairo'] text-[1.5rem] font-[200]">
+              Event
+            </h3>
+          </div>
+          {today.map((elem) => (
+            <>
+              <div className="flex flex-col justify-start gap-[1rem] p-[0.5rem]">
+                <h3 className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200]">
+                  {elem.startDateTime.substring(11, 16)}
+                </h3>
+                <h3 className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200] cursor-pointer">
+                  {elem.eventName}
+                </h3>
+              </div>
+            </>
+          ))}
+        </div>
       </div>
-      <div>
+      <div className="mt-[4rem]">
         <div className="flex justify-between items-center">
           <h3 className="text-[#FF007A] font-['Cairo'] text-[1.7rem] font-[200]">
             Tomorrow
@@ -86,7 +125,28 @@ const Schedules = () => {
             </h3>
           </div>
         </div>
-        <div className="h-[20vh]">{/* Meeting INFO */}</div>
+        <div className="m-[1.5rem] flex justify-start items-start gap-[2rem]">
+          <div className="flex flex-col justify-start gap-[1rem] p-[0rem]">
+            <h3 className="text-[#FF007A] font-['Cairo'] text-[1.5rem] font-[200]">
+              Time
+            </h3>
+            <h3 className="text-[#FF007A] font-['Cairo'] text-[1.5rem] font-[200]">
+              Event
+            </h3>
+          </div>
+          {tom.map((elem) => (
+            <>
+              <div className="flex flex-col justify-start gap-[1rem] p-[0.5rem]">
+                <h3 className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200]">
+                  {elem.startDateTime.substring(11, 16)}
+                </h3>
+                <h3 className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200] cursor-pointer">
+                  {elem.eventName}
+                </h3>
+              </div>
+            </>
+          ))}
+        </div>
       </div>
     </>
   );
