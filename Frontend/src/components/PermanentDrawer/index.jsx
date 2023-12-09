@@ -31,11 +31,16 @@ const calender_style = {
     {
       "background-color": "#FF007A",
     },
-  "& button.css-1u23akw-MuiButtonBase-root-MuiPickersDay-root:focus":
-    {
-      "background-color": "#FF007A",
-    },
+  "& button.css-1u23akw-MuiButtonBase-root-MuiPickersDay-root:focus": {
+    "background-color": "#FF007A",
+  },
   "& button.css-innj4t-MuiPickersYear-yearButton.Mui-selected": {
+    "background-color": "#FF007A",
+  },
+  "& .MuiPickersMonth-root.Mui-selected": {
+    "background-color": "#FF007A",
+  },
+  "& .css-bw88rr-MuiPickersMonth-monthButton.Mui-selected": {
     "background-color": "#FF007A",
   },
 };
@@ -80,11 +85,27 @@ const time_style = {
 };
 
 export default function PermanentDrawer() {
-  const [date, setDate] = useState(dayjs("2023-12-09"));
-  const [time, setTime] = useState(dayjs(""));
+  const [date, setDate] = useState(dayjs(new Date()));
+  const [time, setTime] = useState(dayjs(new Date()));
   const [event, setEvent] = useState("");
 
-console.log(date)
+  const postData = () => {
+    const data = {
+      event_name: event,
+      date: {
+        year: date.year(),
+        month: date.month(),
+        day: date.date(),
+      },
+      time: {
+        hour: time.hour(),
+        minute: time.minute(),
+      },
+    };
+    console.log(data);
+  };
+
+  postData(0);
 
   return (
     <Drawer
@@ -123,6 +144,7 @@ console.log(date)
         <DateCalendar
           value={date}
           onChange={(newDate) => setDate(newDate)}
+          views={["year", "month", "day"]}
           sx={calender_style}
         />
         <TimePicker
