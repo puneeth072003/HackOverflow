@@ -18,6 +18,15 @@ body {
   font-family: "JetBrains Mono", monospace;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 div.MuiPickersLayout-root {
   background-color: #17202a;
   color: #fff;
