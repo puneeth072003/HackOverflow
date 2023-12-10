@@ -67,8 +67,8 @@ const Schedules = () => {
 
   const style = {
     position: "absolute",
-    width: "45vw",
-    height: "70vh",
+    width: "30vw",
+    height: "65vh",
     top: "54%",
     left: "48%",
     transform: "translate(-50%, -50%)",
@@ -92,11 +92,10 @@ const Schedules = () => {
 
   const handleOpen = (e) => {
     const key = e.target.getAttribute("id");
-    events.filter(e => {
-      if(e.id ===key)
-        setModelInfo(e)
-    })
-    setOpen(true)
+    events.filter((e) => {
+      if (e.id === key) setModelInfo(e);
+    });
+    setOpen(true);
   };
 
   const handleClose = () => setOpen(false);
@@ -158,7 +157,6 @@ const Schedules = () => {
             Tomorrow
           </h3>
           <hr
-            // eslint-disable-next-line react/prop-types
             className="border-[#313942]"
             style={{ width: obj.large ? "35vw" : "52vw" }}
           />
@@ -202,7 +200,6 @@ const Schedules = () => {
       {/* Modal */}
       <Modal
         open={open}
-        onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -224,19 +221,68 @@ const Schedules = () => {
             </h2>
             <Divider sx={{ "border-color": "#313942" }} />
           </div>
-          <div className="flex flex-col justify-center items-center gap-[1rem]">
-            <div className="flex justify-center items-center gap-[1.5rem]">
-              <h2>Event Name: </h2>
-              <h2>{modalInfo.eventName}</h2>
+          <div className="flex flex-col justify-center items-start gap-[1rem]">
+            <div className="flex justify-start items-center gap-[0.5rem]">
+              <h2 className="text-[#ff007a] font-['Cairo'] text-[1.2rem]">
+                Event Name:{" "}
+              </h2>
+              <h2 className="text-[1.2rem] font-['Cairo']">
+                {modalInfo.eventName}
+              </h2>
             </div>
-            <div className="flex justify-center items-center gap-[1.5rem]">
-              <h2>Start Time: </h2>
-              <h2>{modalInfo.startDateTime.substring(0,10)+' @ '+modalInfo.startDateTime.substring(11,16)}</h2>
+            <div className="flex justify-start items-center gap-[0.5rem]">
+              <h2 className="text-[#ff007a] text-[1.2rem] font-['Cairo']">
+                Start Date:{" "}
+              </h2>
+              <h2 className="text-[1.2rem] font-['Cairo']">
+                {modalInfo.startDateTime &&
+                  modalInfo.startDateTime.slice(0, 10)}
+              </h2>
             </div>
-            <div className="flex justify-center items-center gap-[1.5rem]">
-              <h2>Creator Email: </h2>
-              <h2>{modalInfo.email}</h2>
+            <div className="flex justify-start items-center gap-[0.5rem]">
+              <h2 className="text-[#ff007a] text-[1.2rem] font-['Cairo']">
+                Start Time:{" "}
+              </h2>
+              <h2 className="text-[1.2rem] font-['Cairo']">
+                {modalInfo.startDateTime &&
+                  modalInfo.startDateTime.slice(11, 16)}
+              </h2>
             </div>
+            <div className="flex justify-start items-center gap-[0.5rem]">
+              <h2 className="text-[#ff007a] text-[1.2rem] font-['Cairo']">
+                Creator Email:{" "}
+              </h2>
+              <h2 className="text-[1.2rem] font-['Cairo']">
+                {modalInfo.email}
+              </h2>
+            </div>
+            <div className="flex justify-start items-center gap-[0.5rem]">
+              <h2 className="text-[#ff007a] text-[1.2rem] font-['Cairo']">
+                Meeting Link:{" "}
+              </h2>
+              <h2 className="text-[1.2rem] font-['Cairo']">
+                {modalInfo.Link === "No such Link is provided" ? (
+                  <a>{modalInfo.Link}</a>
+                ) : (
+                  modalInfo.Link
+                )}
+              </h2>
+            </div>
+            <div className="flex justify-center items-center gap-[0.5rem]">
+              <h2 className="text-[#ff007a] text-[1.2rem] font-['Cairo']">
+                Description:{" "}
+              </h2>
+              <p className="text-[1rem] font-['Cairo']">
+                {modalInfo.description}
+              </p>
+            </div>
+            <button
+              onClick={handleClose}
+              data-function="post-date-time"
+              className="text-[#000] font-['Cairo'] py-[0.5rem] text-[1.2rem] rounded-[14px] bg-[#FF007A] w-[10rem] mx-[auto] mt-[1rem]"
+            >
+              Done
+            </button>
           </div>
         </Box>
       </Modal>

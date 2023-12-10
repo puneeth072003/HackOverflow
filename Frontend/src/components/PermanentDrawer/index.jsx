@@ -99,7 +99,7 @@ export default function PermanentDrawer() {
       raw.substring(0, 4);
     const attr = Date.parse(date);
     calender_style[`button.MuiPickersDay-root[data-timestamp="${attr}"]`] = {
-      border: "2px solid #288BEE",
+      border: "2px solid #fff",
     };
   });
   return (
@@ -120,19 +120,9 @@ export default function PermanentDrawer() {
         anchor="right"
       >
         {/* Header? */}
-        <h1 className="text-center text-[#FF007A] font-['Cairo'] text-[1.4rem] py-[1rem] font-[1000]">
-          Setup your Meeting
+        <h1 className="text-center text-[#FF007A] font-['Cairo'] text-[1.4rem] pt-[1rem] font-[1000]">
+          Calendar
         </h1>
-        <input
-          required
-          value={eventsName}
-          onChange={(event) => setEventsName(event.target.value)}
-          type="text"
-          name="event"
-          data-function="fetch-event"
-          placeholder="Enter Event Name..."
-          className="mx-[1.5rem] my-[1rem] px-[7px]"
-        />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DateCalendar
             value={date}
@@ -141,6 +131,10 @@ export default function PermanentDrawer() {
             sx={calender_style}
           />
         </LocalizationProvider>
+        <Divider sx={{ "border-color": "#313942" }} />
+        <h1 className="text-center text-[#FF007A] font-['Cairo'] text-[1.4rem] py-[1rem] font-[1000]">
+          Setup your Meeting
+        </h1>
         <button
           onClick={handleOpen}
           data-function="post-date-time"
@@ -175,7 +169,18 @@ export default function PermanentDrawer() {
             </h2>
             <Divider sx={{ "border-color": "#313942" }} />
           </div>
-          <div></div>
+          <div>
+            <input
+              required
+              value={eventsName}
+              onChange={(event) => setEventsName(event.target.value)}
+              type="text"
+              name="event"
+              data-function="fetch-event"
+              placeholder="Enter Event Name..."
+              className="mx-[1.5rem] my-[1rem] px-[7px]"
+            />
+          </div>
         </Box>
       </Modal>
     </>
