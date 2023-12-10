@@ -2,6 +2,11 @@ import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { BACKEND_URI } from "../../config";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import Divider from "@mui/material/Divider";
 
 const Schedules = () => {
   const [events, setEvents] = useState([]);
@@ -60,6 +65,42 @@ const Schedules = () => {
 
   const obj = useOutletContext();
 
+  const style = {
+    position: "absolute",
+    width: "45vw",
+    height: "70vh",
+    top: "54%",
+    left: "48%",
+    transform: "translate(-50%, -50%)",
+    bgcolor: "#17202a",
+    border: "1px solid rgb(255 255 255/ 20%)",
+    borderRadius: "15px",
+    boxShadow: 24,
+    p: 0,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "1.5rem",
+    "&::before, &::after": {
+      content: '""',
+    },
+  };
+
+  const [open, setOpen] = useState(false);
+
+  const [modalInfo, setModelInfo] = useState({});
+
+  const handleOpen = (e) => {
+    const key = e.target.getAttribute("id");
+    events.filter(e => {
+      if(e.id ===key)
+        setModelInfo(e)
+    })
+    setOpen(true)
+  };
+
+  const handleClose = () => setOpen(false);
+
   return (
     <>
       <h1 className="text-center text-[#FF007A] font-['Cairo'] text-[2.5rem] py-[1rem] font-[600]">
@@ -98,7 +139,12 @@ const Schedules = () => {
                 <h3 className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200]">
                   {elem.startDateTime.substring(11, 16)}
                 </h3>
-                <h3 className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200] cursor-pointer">
+                <h3
+                  id={elem.id}
+                  data-function="today"
+                  onClick={handleOpen}
+                  className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200] cursor-pointer"
+                >
                   {elem.eventName}
                 </h3>
               </div>
@@ -140,7 +186,12 @@ const Schedules = () => {
                 <h3 className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200]">
                   {elem.startDateTime.substring(11, 16)}
                 </h3>
-                <h3 className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200] cursor-pointer">
+                <h3
+                  id={elem.id}
+                  data-function="tomorrow"
+                  onClick={handleOpen}
+                  className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200] cursor-pointer"
+                >
                   {elem.eventName}
                 </h3>
               </div>
@@ -148,6 +199,47 @@ const Schedules = () => {
           ))}
         </div>
       </div>
+      {/* Modal */}
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <FontAwesomeIcon
+            style={{
+              position: "absolute",
+              top: 15,
+              right: 17,
+              fontSize: "1.5rem",
+              cursor: "pointer",
+            }}
+            onClick={handleClose}
+            icon={faXmark}
+          />
+          <div className="w-[100%]">
+            <h2 className="font-['Cairo'] text-[#ff007a] text-[2rem] text-center">
+              Event Details
+            </h2>
+            <Divider sx={{ "border-color": "#313942" }} />
+          </div>
+          <div className="flex flex-col justify-center items-center gap-[1rem]">
+            <div className="flex justify-center items-center gap-[1.5rem]">
+              <h2>Event Name: </h2>
+              <h2>{modalInfo.eventName}</h2>
+            </div>
+            <div className="flex justify-center items-center gap-[1.5rem]">
+              <h2>Start Time: </h2>
+              <h2>{modalInfo.startDateTime.substring(0,10)+' @ '+modalInfo.startDateTime.substring(11,16)}</h2>
+            </div>
+            <div className="flex justify-center items-center gap-[1.5rem]">
+              <h2>Creator Email: </h2>
+              <h2>{modalInfo.email}</h2>
+            </div>
+          </div>
+        </Box>
+      </Modal>
     </>
   );
 };
