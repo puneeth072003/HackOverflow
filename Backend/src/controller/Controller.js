@@ -1,5 +1,6 @@
 require("dotenv").config();
 const googleapis = require("googleapis");
+const createEvent = require("./writeEvents");
 
 const getHome = async (req, res) => {
   res.send("Hi huddle here");
@@ -31,25 +32,15 @@ const fetchAccessToken = async (code) => {
   }
 };
 
-const fetchUserInfo = async (req, res) => {
-  try {
-    const peopleApi = googleapis.people({
-      version: "v1",
-      auth: global.access_token_calendar,
-    });
-    const response = await peopleApi.people.get({
-      resourceName: "people/me",
-      personFields: "names,emailAddresses",
-    });
+const writeEvent=(req,res)=>{
+  // Example usage:
+  const accessToken = global.access_token_calendar;
+  const calendarId = 'primary'; // Use 'primary' for the primary calendar
+  const eventSummary = 'Sample Event';
+  const eventStart = '2023-12-31T12:00:00Z'; // UTC time
+  const eventEnd = '2023-12-31T13:00:00Z'; // UTC time
 
-    const username = response.data.names[0].displayName;
-    const email = response.data.emailAddresses[0].value;
+  createEvent(accessToken, calendarId, eventSummary, eventStart, eventEnd);
+}
 
-    res.json({ username: username, email: email });
-  } catch (error) {
-    console.error("Error fetching user information:", error);
-    res.send(error);
-  }
-};
-
-module.exports = { getHome, fetchAccessToken };
+module.exports = { getHome, fetchAccessToken ,writeEvent};

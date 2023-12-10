@@ -6,7 +6,7 @@ const getLogin = async (req, res) => {
       client_id: process.env.CALENDER_CLIENT_ID, // Replace with your actual client ID
       redirect_uri: "http://localhost:3500/api/v1/login/callback",
       scope:
-        "https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/calendar", // Read and write access to calendars
+        "https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/gmail.readonly openid email", // Read and write access to calendars
       response_type: "code",
       access_type: "offline", // Allow refresh tokens for long-term access
       prompt: "consent", // Force user consent even if previously granted
