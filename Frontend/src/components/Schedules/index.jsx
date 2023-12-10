@@ -67,7 +67,7 @@ const Schedules = () => {
 
   const style = {
     position: "absolute",
-    width: "30vw",
+    width: "35vw",
     height: "65vh",
     top: "54%",
     left: "48%",
