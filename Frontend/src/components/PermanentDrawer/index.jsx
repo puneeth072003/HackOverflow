@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
-import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { useState } from "react";
 import "./style.css";
 
@@ -13,48 +12,8 @@ import { BACKEND_URI } from "../../config";
 
 const drawerWidth = 350;
 
-const time_style = {
-  marginLeft: "1rem",
-  marginRight: "1rem",
-  marginBottom: "2rem",
-  border: "none",
-  "input, svg": {
-    color: "#fff",
-  },
-  input: {
-    padding: "16.5px 14px",
-  },
-  "& button MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1e6y48t-MuiButtonBase-root-MuiButton-root":
-    {
-      color: "#FF007A",
-    },
-  "& .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline":
-    {
-      "border-color": "#FF007A",
-    },
-  "& .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-    {
-      "border-color": "#FF007A",
-      "border-width": "2px",
-    },
-  "& .MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline":
-    {
-      "border-color": "#FF007A",
-      "border-width": "2px",
-    },
-  "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-    "border-color": "#FF007A",
-    "border-width": "2px",
-  },
-  "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline:hover": {
-    "border-color": "#FF007A",
-    "border-width": "2px",
-  },
-};
-
 export default function PermanentDrawer() {
   const [date, setDate] = useState(dayjs(new Date()));
-  const [time, setTime] = useState(dayjs(new Date()));
   const [events, setEvents] = useState([]);
   const [eventsName, setEventsName] = useState([]);
 
@@ -110,10 +69,8 @@ export default function PermanentDrawer() {
     calender_style[`button.MuiPickersDay-root[data-timestamp="${attr}"]`] = {
       border: "2px solid #288BEE",
     }
-
     
   });
-
   return (
     <Drawer
       sx={{
@@ -150,12 +107,6 @@ export default function PermanentDrawer() {
           onChange={(newDate) => setDate(newDate)}
           views={["year", "month", "day"]}
           sx={calender_style}
-        />
-        <TimePicker
-          label=""
-          value={time}
-          onChange={(newTime) => setTime(newTime)}
-          sx={time_style}
         />
       </LocalizationProvider>
       <button
