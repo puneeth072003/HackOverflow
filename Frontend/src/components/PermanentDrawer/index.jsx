@@ -6,7 +6,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { useState } from "react";
-import './style.css'
+import "./style.css";
 
 const drawerWidth = 350;
 
@@ -31,7 +31,16 @@ const calender_style = {
     {
       "background-color": "#FF007A",
     },
+  "& button.css-1u23akw-MuiButtonBase-root-MuiPickersDay-root:focus": {
+    "background-color": "#FF007A",
+  },
   "& button.css-innj4t-MuiPickersYear-yearButton.Mui-selected": {
+    "background-color": "#FF007A",
+  },
+  "& .MuiPickersMonth-root.Mui-selected": {
+    "background-color": "#FF007A",
+  },
+  "& .css-bw88rr-MuiPickersMonth-monthButton.Mui-selected": {
     "background-color": "#FF007A",
   },
 };
@@ -44,12 +53,13 @@ const time_style = {
   "input, svg": {
     color: "#fff",
   },
-  "input": {
-    padding: "16.5px 14px"
+  input: {
+    padding: "16.5px 14px",
   },
-  "& button MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1e6y48t-MuiButtonBase-root-MuiButton-root": {
-    color: "#FF007A"
-  },
+  "& button MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1e6y48t-MuiButtonBase-root-MuiButton-root":
+    {
+      color: "#FF007A",
+    },
   "& .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline":
     {
       "border-color": "#FF007A",
@@ -64,21 +74,36 @@ const time_style = {
       "border-color": "#FF007A",
       "border-width": "2px",
     },
-  "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline":
-    {
-      "border-color": "#FF007A",
-      "border-width": "2px",
-    },
-  "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline:hover":
-    {
-      "border-color": "#FF007A",
-      "border-width": "2px",
-    },
+  "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
+    "border-color": "#FF007A",
+    "border-width": "2px",
+  },
+  "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline:hover": {
+    "border-color": "#FF007A",
+    "border-width": "2px",
+  },
 };
 
 export default function PermanentDrawer() {
-  const [date, setDate] = useState(dayjs(""));
-  const [time, setTime] = useState(dayjs(""));
+  const [date, setDate] = useState(dayjs(new Date()));
+  const [time, setTime] = useState(dayjs(new Date()));
+  const [event, setEvent] = useState("");
+
+  const postData = () => {
+    const data = {
+      event_name: event,
+      date: {
+        year: date.year(),
+        month: date.month(),
+        day: date.date(),
+      },
+      time: {
+        hour: time.hour(),
+        minute: time.minute(),
+      },
+    };
+    console.log(data);
+  };
 
   return (
     <Drawer
@@ -100,10 +125,21 @@ export default function PermanentDrawer() {
       <h1 className="text-center text-[#FF007A] font-['Cairo'] text-[1.4rem] py-[1rem] font-[1000]">
         Setup your Meeting
       </h1>
+      <input
+        required
+        value={event}
+        onChange={(event) => setEvent(event.target.value)}
+        type="text"
+        name="event"
+        data-function="fetch-event"
+        placeholder="Enter Event Name..."
+        className="mx-[1.5rem] my-[1rem] px-[7px]"
+      />
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DateCalendar
           value={date}
           onChange={(newDate) => setDate(newDate)}
+          views={["year", "month", "day"]}
           sx={calender_style}
         />
         <TimePicker
@@ -114,12 +150,12 @@ export default function PermanentDrawer() {
         />
       </LocalizationProvider>
       <button
-              // onClick={postData}
-              data-function="post-date-time"
-              className="font-['Cairo'] py-[0.5rem] text-[1.2rem] rounded-[14px] bg-[#FF007A] w-[10rem] mx-[auto] mb-[2rem]"
-            >
-              Create Meeting
-            </button>
+        onClick={postData}
+        data-function="post-date-time"
+        className="font-['Cairo'] py-[0.5rem] text-[1.2rem] rounded-[14px] bg-[#FF007A] w-[10rem] mx-[auto] mb-[2rem]"
+      >
+        Create Meeting
+      </button>
       <Divider sx={{ "border-color": "#313942" }} />
     </Drawer>
   );

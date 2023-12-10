@@ -59,6 +59,7 @@ export const Login = () => {
               Username:
             </label>
             <input
+              data-function="fetch-username"
               value={username}
               onChange={(event) => setUsername(event.target.value)}
               type="text"
@@ -71,6 +72,7 @@ export const Login = () => {
               Password:
             </label>
             <input
+              data-function="fetch-password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               type="password"

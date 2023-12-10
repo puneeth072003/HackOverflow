@@ -1,0 +1,19 @@
+a.active {
+    background-color: #ff007a;
+}
+
+svg[data-icon=calendar] path {
+    fill: #fff
+}
+svg[data-icon=square] path {
+    fill: #fff
+}
+svg[data-icon=ellipsis] path {
+    fill: #fff
+}
+
+svg[data-icon=calendar],
+svg[data-icon=square],
+svg[data-icon=ellipsis] {
+    margin-right: 10px;
+}

@@ -1,0 +1,3 @@
+div[data-function=card] {
+    transition: all 900ms;
+}
