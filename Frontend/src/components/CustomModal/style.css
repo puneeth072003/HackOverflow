@@ -36,3 +36,10 @@ span.kFhUBM span {
 button[data-function="post-video"]:active {
   box-shadow: 0 0 10px #ff007a;
 }
+
+svg.MuiCircularProgress-svg {
+  height: 9vh;
+}
+svg.MuiCircularProgress-svg circle {
+  stroke: #ff007a;
+}

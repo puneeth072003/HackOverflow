@@ -2,7 +2,7 @@ const Final = () => {
   console.log(window.summary);
   console.log(window.executionTime);
   return (
-    <div className="flex flex-col justify-center items-center gap-[1rem]">
+    <div className="flex flex-col justify-center items-center gap-[0.75rem] before:content-[''] after:content-['']">
       <h1 className="text-center text-[#FF007A] font-['Cairo'] text-[2.5rem] py-[0.25rem] font-[600]">
         Transcription
       </h1>
