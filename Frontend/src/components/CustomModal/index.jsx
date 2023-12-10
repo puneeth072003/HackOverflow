@@ -3,9 +3,11 @@ import axios from "axios";
 import { BACKEND_URI } from "../../config";
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Divider from "@mui/material/Divider";
+import axios from "axios";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMicrochip, faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -37,7 +39,6 @@ const style = {
 
 const CustomModal = () => {
   const [open, setOpen] = useState(false);
-
   const [file, setFile] = useState(null);
 
   const handleOpen = () => setOpen(true);
@@ -45,6 +46,7 @@ const CustomModal = () => {
   const handleClose = () => setOpen(false);
 
   const handleChange = (file) => setFile(file);
+
 
   const postData = async (e) => {
     e.preventDefault();
@@ -64,6 +66,47 @@ const CustomModal = () => {
       console.error("Error uploading file", error);
 
     }
+  // ##################################
+  const navigate = useNavigate();
+  const url = "http://localhost:3500/api/v1/final";
+  const redirecturi = "http://localhost:5173/transcribe";
+
+  const handleTransribe = async () => {
+    try {
+      const response = await axios.get(url);
+      if (response.data) {
+        window.summary = response.data.summary;
+        window.executionTime = response.data.executionTime;
+        navigate("/transcribe");
+      }
+    } catch (error) {
+      console.error("Error in transcribing:", error);
+    }
+  };
+  // ##################################
+
+  // Not Tested
+  console.log(file);
+
+  const style = {
+    position: "absolute",
+    width: "45vw",
+    height: "70vh",
+    top: "54%",
+    left: "48%",
+    transform: "translate(-50%, -50%)",
+    bgcolor: "#17202a",
+    border: "1px solid rgb(255 255 255/ 20%)",
+    borderRadius: "15px",
+    boxShadow: 24,
+    p: 0,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "1.5rem",
+    "&::before, &::after": {
+      content: '""',
+    },
   };
 
   return (
@@ -120,6 +163,16 @@ const CustomModal = () => {
               Upload
             </button>
           </div>
+          <button
+            className="flex gap-[0.5rem] justify-center content-center py-[0.5rem] px-[1.2rem] rounded-[14px] text-[1rem] bg-[#FF007A] text-[#000]"
+            onClick={handleTransribe}
+          >
+            <FontAwesomeIcon
+              style={{ alignSelf: "center" }}
+              icon={faMicrochip}
+            />
+            <span className="font-['Cairo']">Transcribe</span>
+          </button>
         </Box>
       </Modal>
     </>
