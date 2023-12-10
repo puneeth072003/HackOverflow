@@ -8,6 +8,7 @@ const { getLogin } = require("../controller/login");
 const googleCalendarCallback = require("../controller/callback");
 const fetchCalendarEvents = require("../controller/fetchCalendarEvents");
 const getNotification = require("../controller/notification");
+const getUser = require("../controller/userInfo");
 
 const router = express.Router();
 
@@ -20,7 +21,7 @@ router.get("/login", getLogin);
 router.get("/login/callback", googleCalendarCallback);
 router.get("/notification",getNotification);
 
-// router.get("/fetchUserInfo", fetchUserInfo);
+router.get("/user", getUser);
 router.get("/updateCalendar", fetchCalendarEvents);
 router.get("/write",writeEvent) //change this later to post
 
