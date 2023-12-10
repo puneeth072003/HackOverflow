@@ -18,7 +18,15 @@ const Schedules = () => {
 
   const getDate = dayjs(new Date());
 
-  console.log(events)
+  console.log(events);
+
+  try {
+    window.eventFollowUp = events && events[0].description.split(" ");
+  }
+  catch(e){
+    console.log("schedules: description Error")
+  }
+  console.log(window.eventFollowUp)
 
   const today = [];
   const tom = [];
@@ -103,12 +111,15 @@ const Schedules = () => {
   const handleClose = () => setOpen(false);
 
   const handleButtonClose = () => {
-
-    const left = (window.innerWidth - 600)/2;
-    const top = (window.innerHeight - 500)/2;
-    window.open(`${modalInfo.Link}`, 'Popup', `width=600,height=500,left=${left}, top=${top}`)
+    const left = (window.innerWidth - 600) / 2;
+    const top = (window.innerHeight - 500) / 2;
+    window.open(
+      `${modalInfo.Link}`,
+      "Popup",
+      `width=600,height=500,left=${left}, top=${top}`
+    );
     setOpen(false);
-  }
+  };
 
   return (
     <>
