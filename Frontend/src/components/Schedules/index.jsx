@@ -135,14 +135,14 @@ const Schedules = () => {
           {today.map((elem) => (
             <>
               <div className="flex flex-col justify-start gap-[1rem] p-[0.5rem]">
-                <h3 className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200]">
+                <h3 className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200] text-center">
                   {elem.startDateTime.substring(11, 16)}
                 </h3>
                 <h3
                   id={elem.id}
                   data-function="today"
                   onClick={handleOpen}
-                  className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200] cursor-pointer"
+                  className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200] cursor-pointer text-center"
                 >
                   {elem.eventName}
                 </h3>
@@ -181,14 +181,14 @@ const Schedules = () => {
           {tom.map((elem) => (
             <>
               <div className="flex flex-col justify-start gap-[1rem] p-[0.5rem]">
-                <h3 className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200]">
+                <h3 className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200] text-center">
                   {elem.startDateTime.substring(11, 16)}
                 </h3>
                 <h3
                   id={elem.id}
                   data-function="tomorrow"
                   onClick={handleOpen}
-                  className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200] cursor-pointer"
+                  className="text-[#fff] font-['Cairo'] text-[1.2rem] font-[200] text-center cursor-pointer"
                 >
                   {elem.eventName}
                 </h3>
@@ -261,11 +261,7 @@ const Schedules = () => {
                 Meeting Link:{" "}
               </h2>
               <h2 className="text-[1.2rem] font-['Cairo']">
-                {modalInfo.Link === "No such Link is provided" ? (
-                  <a>{modalInfo.Link}</a>
-                ) : (
-                  modalInfo.Link
-                )}
+                {modalInfo.Link}
               </h2>
             </div>
             <div className="flex justify-center items-center gap-[0.5rem]">
@@ -281,7 +277,7 @@ const Schedules = () => {
               data-function="post-date-time"
               className="text-[#000] font-['Cairo'] py-[0.5rem] text-[1.2rem] rounded-[14px] bg-[#FF007A] w-[10rem] mx-[auto] mt-[1rem]"
             >
-              Done
+              <a href={modalInfo.Link}>Join Meeting</a>
             </button>
           </div>
         </Box>
