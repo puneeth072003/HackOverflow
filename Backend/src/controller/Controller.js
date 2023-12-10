@@ -33,14 +33,15 @@ const fetchAccessToken = async (code) => {
 };
 
 const writeEvent=(req,res)=>{
-  // Example usage:
+  const data = req.body
   const accessToken = global.access_token_calendar;
   const calendarId = 'primary'; // Use 'primary' for the primary calendar
-  const eventSummary = 'Sample Event';
-  const eventStart = '2023-12-31T12:00:00Z'; // UTC time
-  const eventEnd = '2023-12-31T13:00:00Z'; // UTC time
+  const eventSummary = data.eventsName;
+  const eventStart = data.startTime; // UTC time
+  const eventEnd = data.endTime ; // UTC time
+  const eventFollowUps = data.eventDesc ; // UTC time
 
-  createEvent(accessToken, calendarId, eventSummary, eventStart, eventEnd);
+  createEvent(accessToken, calendarId, eventSummary, eventStart, eventEnd, eventFollowUps);
 }
 
 module.exports = { getHome, fetchAccessToken ,writeEvent};

@@ -18,6 +18,8 @@ const Schedules = () => {
 
   const getDate = dayjs(new Date());
 
+  console.log(events)
+
   const today = [];
   const tom = [];
 
