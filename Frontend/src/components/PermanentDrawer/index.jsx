@@ -1,5 +1,6 @@
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
+// import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import dayjs from "dayjs";
 import { useEffect } from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers";
@@ -19,6 +20,7 @@ const drawerWidth = 350;
 export default function PermanentDrawer() {
   const [date, setDate] = useState(dayjs(new Date()));
   const [events, setEvents] = useState([]);
+
   const [eventsName, setEventsName] = useState([]);
 
   const [open, setOpen] = useState(false);
@@ -180,6 +182,13 @@ export default function PermanentDrawer() {
               placeholder="Enter Event Name..."
               className="mx-[1.5rem] my-[1rem] px-[7px]"
             />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              {/* <DateTimePicker
+                label="Basic date time picker"
+                value={value}
+                onChange={(newValue) => setValue(newValue)}
+              /> */}
+            </LocalizationProvider>
           </div>
         </Box>
       </Modal>

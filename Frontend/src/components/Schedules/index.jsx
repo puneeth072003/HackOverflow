@@ -100,6 +100,14 @@ const Schedules = () => {
 
   const handleClose = () => setOpen(false);
 
+  const handleButtonClose = () => {
+
+    const left = (window.innerWidth - 600)/2;
+    const top = (window.innerHeight - 500)/2;
+    window.open(`${modalInfo.Link}`, 'Popup', `width=600,height=500,left=${left}, top=${top}`)
+    setOpen(false);
+  }
+
   return (
     <>
       <h1 className="text-center text-[#FF007A] font-['Cairo'] text-[2.5rem] py-[1rem] font-[600]">
@@ -260,9 +268,7 @@ const Schedules = () => {
               <h2 className="text-[#ff007a] text-[1.2rem] font-['Cairo']">
                 Meeting Link:{" "}
               </h2>
-              <h2 className="text-[1.2rem] font-['Cairo']">
-                {modalInfo.Link}
-              </h2>
+              <h2 className="text-[1.2rem] font-['Cairo']">{modalInfo.Link}</h2>
             </div>
             <div className="flex justify-center items-center gap-[0.5rem]">
               <h2 className="text-[#ff007a] text-[1.2rem] font-['Cairo']">
@@ -273,11 +279,11 @@ const Schedules = () => {
               </p>
             </div>
             <button
-              onClick={handleClose}
+              onClick={handleButtonClose}
               data-function="post-date-time"
               className="text-[#000] font-['Cairo'] py-[0.5rem] text-[1.2rem] rounded-[14px] bg-[#FF007A] w-[10rem] mx-[auto] mt-[1rem]"
             >
-              <a href={modalInfo.Link}>Join Meeting</a>
+              Join Meeting
             </button>
           </div>
         </Box>
