@@ -1,13 +1,12 @@
 import axios from "axios";
 
-import { BACKEND_URI } from "../../config";
+// import { BACKEND_URI } from "../../config";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Divider from "@mui/material/Divider";
-import axios from "axios";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMicrochip, faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -15,27 +14,6 @@ import { faMicrochip, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FileUploader } from "react-drag-drop-files";
 
 import "./style.css";
-
-const style = {
-  position: "absolute",
-  width: "45vw",
-  height: "80vh",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  bgcolor: "#17202a",
-  border: "1px solid rgb(255 255 255/ 20%)",
-  borderRadius: "15px",
-  boxShadow: 24,
-  p: 0,
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  gap: "1.5rem",
-  "&::before, &::after": {
-    content: '""',
-  },
-};
 
 const CustomModal = () => {
   const [open, setOpen] = useState(false);
@@ -47,29 +25,10 @@ const CustomModal = () => {
 
   const handleChange = (file) => setFile(file);
 
-
-  const postData = async (e) => {
-    e.preventDefault();
-
-    if (file === null) {
-      console.error("No file selected");
-      return;
-    }
-
-    let formData = new FormData();
-    formData.append("videos", file);
-
-    try {
-      const response = await axios.post(`${BACKEND_URI}/upload`, formData);
-      console.log("Upload successful", response.data);
-    } catch (error) {
-      console.error("Error uploading file", error);
-
-    }
   // ##################################
   const navigate = useNavigate();
   const url = "http://localhost:3500/api/v1/final";
-  const redirecturi = "http://localhost:5173/transcribe";
+  // const redirecturi = "http://localhost:5173/transcribe";
 
   const handleTransribe = async () => {
     try {
@@ -156,7 +115,7 @@ const CustomModal = () => {
           </div>
           <div>
             <button
-              onClick={postData}
+              // onClick={postData}
               data-function="post-video"
               className="font-['Cairo'] py-[0.5rem] text-[1.2rem] rounded-[14px] bg-[#FF007A] w-[7rem] mx-[auto] mb-[2rem] text-[#000]"
             >
@@ -178,5 +137,4 @@ const CustomModal = () => {
     </>
   );
 };
-
 export default CustomModal;

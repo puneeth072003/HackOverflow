@@ -17,7 +17,6 @@ function App() {
           <Route path="features" element={<BusinessCards />} />
           <Route path="more" element={<h1>Yet to Come</h1>} />
         </Route>
-        <Route path="/home" element={<Home />} />
         <Route path="/transcribe" element={<Final />} />
       </Routes>
     </>
