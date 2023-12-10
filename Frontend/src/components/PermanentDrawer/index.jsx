@@ -1,6 +1,7 @@
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
 import dayjs from "dayjs";
+import { useEffect } from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
@@ -8,42 +9,9 @@ import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { useState } from "react";
 import "./style.css";
 
-const drawerWidth = 350;
+import { BACKEND_URI } from "../../config";
 
-const calender_style = {
-  "& span, button, div": { color: "#fff" },
-  "& button.Mui-selected": { "background-color": "#FF007A" },
-  "& button.Mui-selected:hover": {
-    "background-color": "#FF007A",
-  },
-  "& button.MuiPickersDay-today": {
-    border: "1px solid #FF007A",
-  },
-  "& button.css-1u23akw-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover":
-    {
-      "background-color": "#FF007A",
-    },
-  "& button.css-jgls56-MuiButtonBase-root-MuiPickersDay-root:focus.Mui-selected":
-    {
-      "background-color": "#FF007A",
-    },
-  "& button.css-1u23akw-MuiButtonBase-root-MuiPickersDay-root:focus.Mui-selected":
-    {
-      "background-color": "#FF007A",
-    },
-  "& button.css-1u23akw-MuiButtonBase-root-MuiPickersDay-root:focus": {
-    "background-color": "#FF007A",
-  },
-  "& button.css-innj4t-MuiPickersYear-yearButton.Mui-selected": {
-    "background-color": "#FF007A",
-  },
-  "& .MuiPickersMonth-root.Mui-selected": {
-    "background-color": "#FF007A",
-  },
-  "& .css-bw88rr-MuiPickersMonth-monthButton.Mui-selected": {
-    "background-color": "#FF007A",
-  },
-};
+const drawerWidth = 350;
 
 const time_style = {
   marginLeft: "1rem",
@@ -87,23 +55,64 @@ const time_style = {
 export default function PermanentDrawer() {
   const [date, setDate] = useState(dayjs(new Date()));
   const [time, setTime] = useState(dayjs(new Date()));
-  const [event, setEvent] = useState("");
+  const [events, setEvents] = useState([]);
+  const [eventsName, setEventsName] = useState([]);
 
-  const postData = () => {
-    const data = {
-      event_name: event,
-      date: {
-        year: date.year(),
-        month: date.month(),
-        day: date.date(),
+  useEffect(() => {
+    fetch(`${BACKEND_URI}/api/v1/updateCalendar`)
+      .then((res) => res.json())
+      .then((data) => setEvents(data));
+  }, []);
+
+  console.log(events)
+
+  let calender_style = {
+    "& span, button, div": { color: "#fff" },
+    "& button.Mui-selected": { "background-color": "#FF007A" },
+    "& button.Mui-selected:hover": {
+      "background-color": "#FF007A",
+    },
+    "& button.MuiPickersDay-today": {
+      border: "1px solid #FF007A",
+    },
+    "& button.css-1u23akw-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover":
+      {
+        "background-color": "#FF007A",
       },
-      time: {
-        hour: time.hour(),
-        minute: time.minute(),
+    "& button.css-jgls56-MuiButtonBase-root-MuiPickersDay-root:focus.Mui-selected":
+      {
+        "background-color": "#FF007A",
       },
-    };
-    console.log(data);
+    "& button.css-1u23akw-MuiButtonBase-root-MuiPickersDay-root:focus.Mui-selected":
+      {
+        "background-color": "#FF007A",
+      },
+    "& button.css-1u23akw-MuiButtonBase-root-MuiPickersDay-root:focus": {
+      "background-color": "#FF007A",
+    },
+    "& button.css-innj4t-MuiPickersYear-yearButton.Mui-selected": {
+      "background-color": "#FF007A",
+    },
+    "& .MuiPickersMonth-root.Mui-selected": {
+      "background-color": "#FF007A",
+    },
+    "& .css-bw88rr-MuiPickersMonth-monthButton.Mui-selected": {
+      "background-color": "#FF007A",
+    },
   };
+
+  events.forEach((e) => {
+    const raw = e.startDateTime
+    const date = raw.substring(5, 7)+'-'+raw.substring(8, 10)+'-'+raw.substring(0, 4) // Add 2023-12-11T20:30:00Z -> [Month]-[Date]-[Year]
+    console.log(date)
+    const attr = Date.parse(date)
+    console.log(attr)
+    calender_style[`button.MuiPickersDay-root[data-timestamp="${attr}"]`] = {
+      border: "2px solid #288BEE",
+    }
+
+    
+  });
 
   return (
     <Drawer
@@ -127,8 +136,8 @@ export default function PermanentDrawer() {
       </h1>
       <input
         required
-        value={event}
-        onChange={(event) => setEvent(event.target.value)}
+        value={eventsName}
+        onChange={(event) => setEventsName(event.target.value)}
         type="text"
         name="event"
         data-function="fetch-event"
@@ -150,7 +159,7 @@ export default function PermanentDrawer() {
         />
       </LocalizationProvider>
       <button
-        onClick={postData}
+        // onClick={postData}
         data-function="post-date-time"
         className="font-['Cairo'] py-[0.5rem] text-[1.2rem] rounded-[14px] bg-[#FF007A] w-[10rem] mx-[auto] mb-[2rem]"
       >
