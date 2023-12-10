@@ -11,10 +11,8 @@ const Profile = () => {
       .then((data) => setUser(data));
   }, []);
 
-  console.log(user)
-
   return (
-    <div className="flex content-center gap-[0.5rem] border border-[#ff007a] my-[1rem] mx-[0.6rem] px-[0.7rem] py-[0.5rem] rounded-[14px]">
+    <div className="flex items-center gap-[0.5rem] border border-[#ff007a] my-[1rem] mx-[0.6rem] px-[0.7rem] py-[0.5rem] rounded-[14px]">
       <img src={user.userpic} alt="" className="w-[3.5rem] rounded-[50%]" />
       <div className="flex flex-col justify-center">
         <h2 className="text-[#fff]">{user.username}</h2>

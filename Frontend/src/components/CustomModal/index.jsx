@@ -71,7 +71,7 @@ const CustomModal = () => {
   return (
     <>
       <button
-        className="flex gap-[0.5rem] justify-center content-center py-[0.5rem] px-[1.2rem] rounded-[14px] text-[1rem] bg-[#FF007A] text-[#000]"
+        className="flex gap-[0.5rem] justify-center items-center py-[0.5rem] px-[1.2rem] rounded-[14px] text-[1rem] bg-[#FF007A] text-[#000]"
         onClick={handleOpen}
       >
         <FontAwesomeIcon style={{ alignSelf: "center" }} icon={faMicrochip} />
