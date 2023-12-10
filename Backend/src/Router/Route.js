@@ -1,4 +1,4 @@
-const { getHome } = require("../controller/Controller");
+const { getHome, writeEvent } = require("../controller/Controller");
 const express = require("express");
 const ConvtoAudio = require("../Summarizer/VidToAudConvertor");
 const summarize = require("../Summarizer/TextSummarizer");
@@ -22,5 +22,6 @@ router.get("/notification",getNotification);
 
 // router.get("/fetchUserInfo", fetchUserInfo);
 router.get("/updateCalendar", fetchCalendarEvents);
+router.get("/write",writeEvent) //change this later to post
 
 module.exports = router;
