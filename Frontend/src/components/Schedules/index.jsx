@@ -111,7 +111,7 @@ const Schedules = () => {
   return (
     <>
       <h1 className="text-center text-[#FF007A] font-['Cairo'] text-[2.5rem] py-[1rem] font-[600]">
-        Your Schedule
+        Your Schedules
       </h1>
       <div>
         <div className="flex justify-between items-center">

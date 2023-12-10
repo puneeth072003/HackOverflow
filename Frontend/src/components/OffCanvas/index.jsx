@@ -171,7 +171,7 @@ export default function MiniDrawer() {
           }
         >
           <Outlet context={{ large: open }} />
-          <div className="absolute right-2 bottom-3">
+          <div className="absolute z-10 right-2 bottom-3">
             <FloatingButton />
           </div>
         </main>

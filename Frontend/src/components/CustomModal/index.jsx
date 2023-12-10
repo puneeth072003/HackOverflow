@@ -36,16 +36,14 @@ const CustomModal = () => {
       if (response.data) {
         window.summary = response.data.summary;
         window.executionTime = response.data.executionTime;
-        navigate("/transcribe");
+        handleClose()
+        navigate("transcript");
       }
     } catch (error) {
       console.error("Error in transcribing:", error);
     }
   };
   // ##################################
-
-  // Not Tested
-  console.log(file);
 
   const style = {
     position: "absolute",
@@ -114,13 +112,6 @@ const CustomModal = () => {
             />
           </div>
           <div className="flex gap-[2rem]">
-            <button
-              // onClick={postData}
-              data-function="post-video"
-              className="font-['Cairo'] py-[0.5rem] text-[1rem] rounded-[14px] bg-[#FF007A] w-[7rem] mx-[auto] mb-[2rem] text-[#000]"
-            >
-              Upload
-            </button>
             <button
               className=" font-['Cairo'] py-[0.5rem] text-[1rem] rounded-[14px] bg-[#FF007A] w-[7rem] mx-[auto] mb-[2rem] text-[#000]"
               onClick={handleTransribe}
