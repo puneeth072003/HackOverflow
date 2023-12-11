@@ -18,13 +18,6 @@ const Schedules = () => {
 
   const getDate = dayjs(new Date());
 
-  try {
-    window.eventFollowUp = events && events[0].description.split(" ");
-  }
-  catch(e){
-    console.log("schedules: description Error")
-  }
-
   const today = [];
   const tom = [];
 
@@ -108,20 +101,18 @@ const Schedules = () => {
   const handleClose = () => setOpen(false);
 
   const handleButtonClose = () => {
-    const left = (window.innerWidth - 600) / 2;
-    const top = (window.innerHeight - 500) / 2;
-    window.open(
-      `${modalInfo.Link}`,
-      "Popup",
-      `width=600,height=500,left=${left}, top=${top}`
-    );
+
+    const left = (window.innerWidth - 600)/2;
+    const top = (window.innerHeight - 500)/2;
+    const link = modalInfo.Link==='No such Link is provided'?"https://meet.google.com/wxf-mkfb-pnt": modalInfo.Link
+    window.open(`${link}`, 'Popup', `width=600,height=500,left=${left}, top=${top}`)
     setOpen(false);
-  };
+  }
 
   return (
     <>
       <h1 className="text-center text-[#FF007A] font-['Cairo'] text-[2.5rem] py-[1rem] font-[600]">
-        Your Schedules
+        Your Schedule
       </h1>
       <div>
         <div className="flex justify-between items-center">
@@ -278,7 +269,7 @@ const Schedules = () => {
               <h2 className="text-[#ff007a] text-[1.2rem] font-['Cairo']">
                 Meeting Link:{" "}
               </h2>
-              <h2 className="text-[1.2rem] font-['Cairo']">{modalInfo.Link}</h2>
+              <h2 className="text-[1.2rem] font-['Cairo']">{modalInfo.Link==='No such Link is provided'?"https://meet.google.com/wxf-mkfb-pnt": modalInfo.Link}</h2>
             </div>
             <div className="flex justify-center items-center gap-[0.5rem]">
               <h2 className="text-[#ff007a] text-[1.2rem] font-['Cairo']">

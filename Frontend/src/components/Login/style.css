@@ -67,6 +67,30 @@ button[data-function="google-auth"]:hover {
   box-shadow: none;
 }
 
+svg[data-testid=GoogleIcon] path {
+  fill: #fff;
+}
+
+button[data-function="google-auth"]:hover span, button[data-function="google-auth"]:hover svg[data-testid=GoogleIcon] path {
+  fill: #000;
+  color: #000;
+}
+
+.video-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1; /* Place the video behind other content */
+}
+
+#background-video {
+  width: 100%;
+  height: auto;
+}
+
 @media (width<1150px) {
   section[data-function="form"] {
     width: 65vw;

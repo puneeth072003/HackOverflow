@@ -5,9 +5,9 @@ button.MuiFab-root:hover {
     background-color: #ff007a;
 }
 
-svg[data-icon=plus] path {
+svg[data-icon=microphone] path {
     fill: #fff;
 }
-svg[data-icon=plus] {
+svg[data-icon=microphone] {
     font-size: 1.2rem;
 }

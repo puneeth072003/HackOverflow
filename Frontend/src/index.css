@@ -52,3 +52,7 @@ span.MuiDayCalendar-weekDayLabel,
 button.MuiPickersDay-dayWithMargin {
   color: #fff;
 }
+
+div.MuiToolbar-root {
+  background-color: #141C24 !important;
+}
