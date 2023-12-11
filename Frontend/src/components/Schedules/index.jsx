@@ -18,15 +18,12 @@ const Schedules = () => {
 
   const getDate = dayjs(new Date());
 
-  console.log(events);
-
   try {
     window.eventFollowUp = events && events[0].description.split(" ");
   }
   catch(e){
     console.log("schedules: description Error")
   }
-  console.log(window.eventFollowUp)
 
   const today = [];
   const tom = [];
