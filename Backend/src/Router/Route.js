@@ -9,6 +9,7 @@ const googleCalendarCallback = require("../controller/callback");
 const fetchCalendarEvents = require("../controller/fetchCalendarEvents");
 // const getNotification = require("../controller/notification");
 const getUser = require("../controller/userInfo");
+const keywords = require("../python/exec");
 
 const router = express.Router();
 
@@ -24,5 +25,6 @@ router.get("/login/callback", googleCalendarCallback);
 router.get("/user", getUser);
 router.get("/updateCalendar", fetchCalendarEvents);
 router.post("/write", writeEvent); //change this later to post
+router.get("/key", keywords);
 
 module.exports = router;

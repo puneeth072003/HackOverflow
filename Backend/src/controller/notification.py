@@ -1,22 +1,19 @@
 import smtplib
 from email.mime.text import MIMEText
 import sys
+from datetime import datetime
 
 def send_notification(arguments):
-    meetName=arguments[0]
-    email=arguments[1]
-    date=arguments[2]
-    time=arguments[3]
-    subject = f'New Meeting Scheduled - {meetName}'
+    # meetName=arguments[0]
+    email="sooryau7@gmail.com"
+    subject = f'New Meeting Scheduled'
     message = f'''
 
 Hi there,
 
 I hope this email finds you well. We are pleased to inform you that a new meeting has been scheduled, and you are invited to attend. Details of the meeting are provided below:
 
-Meeting{meetName}
-Date: {date}
-Time: {time}
+Please check your Huddle once;)
 
 We look forward to your valuable participation in the meeting. If you have any questions or require additional information, please feel free to reach out.
 
@@ -52,7 +49,6 @@ Huddle
         print("Emails sent successfully!")
     except Exception as e:
         print(f"An error occurred: {str(e)}")
-
 
 
 if __name__ == "__main__":

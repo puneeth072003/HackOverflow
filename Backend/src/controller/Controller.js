@@ -49,7 +49,7 @@ const writeEvent = (req, res) => {
     eventStart,
     eventEnd,
     eventFollowUps,
-    email
+    global.email
   );
 };
 

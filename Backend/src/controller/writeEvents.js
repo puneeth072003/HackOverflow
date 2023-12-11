@@ -8,7 +8,8 @@ async function createEvent(
   eventSummary,
   eventStart,
   eventEnd,
-  eventFollowUps
+  eventFollowUps,
+  email
 ) {
   const oauth2Client = new google.auth.OAuth2();
   oauth2Client.setCredentials({ access_token: accessToken });
@@ -35,7 +36,7 @@ async function createEvent(
     });
 
     console.log(`Event created: ${response.data.htmlLink}`);
-    getNotification(global.email);
+    await getNotification(eventSummary, global.email, eventStart, eventEnd);
   } catch (error) {
     console.error(`Error creating event: ${error.message}`);
   }
