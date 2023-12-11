@@ -2,23 +2,19 @@ const { spawn } = require("child_process");
 const path = require("path");
 const fs = require("fs");
 
-const getNotification = (req, res) => {
+const getNotification = (meetName, email, date, time) => {
   const pythonScriptPath = path.resolve(__dirname, ".\\notification.py");
 
+  payload = [meetName, email, date, time];
+  const pythonProcess = spawn("python", [pythonScriptPath, payload]);
 
-    email=['huddle773@gmail.com'] // Change email here
+  pythonProcess.stdout.on("data", (data) => {
+    console.error(`Python notification Output: ${data}`);
+  });
 
-    const pythonProcess = spawn("python", [pythonScriptPath,email]);
+  pythonProcess.stderr.on("data", (data) => {
+    console.error(`Python Error: ${data}`);
+  });
+};
 
-    pythonProcess.stdout.on("data", (data) => {
-        console.error(`Python notification Output: ${data}`);
-    });
-
-    pythonProcess.stderr.on("data", (data) => {
-      console.error(`Python Error: ${data}`);
-    });
-
-    
-  };
-
-module.exports = getNotification ;
+module.exports = getNotification;

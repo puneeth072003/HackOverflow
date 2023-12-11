@@ -2,9 +2,29 @@ import smtplib
 from email.mime.text import MIMEText
 import sys
 
-def send_notification(emails):
-    subject = 'Test Subject'
-    message = 'This is a test message without GUI.'
+def send_notification(arguments):
+    meetName=arguments[0]
+    email=arguments[1]
+    date=arguments[2]
+    time=arguments[3]
+    subject = f'New Meeting Scheduled - {meetName}'
+    message = f'''
+
+Hi there,
+
+I hope this email finds you well. We are pleased to inform you that a new meeting has been scheduled, and you are invited to attend. Details of the meeting are provided below:
+
+Meeting{meetName}
+Date: {date}
+Time: {time}
+
+We look forward to your valuable participation in the meeting. If you have any questions or require additional information, please feel free to reach out.
+
+Thank you, and we appreciate your commitment to Huddle.
+
+Best regards,
+Huddle
+'''
     try:
         smtp_server = 'smtp.gmail.com'
         smtp_port = 587
@@ -17,15 +37,14 @@ def send_notification(emails):
         server.starttls()
         server.login(smtp_username, smtp_password)
 
-        for email in emails:
-            # Create the email message
-            msg = MIMEText(message)
-            msg['Subject'] = subject
-            msg['From'] = sender_email
-            msg['To'] = email
+        
+        msg = MIMEText(message)
+        msg['Subject'] = subject
+        msg['From'] = sender_email
+        msg['To'] = email
 
             # Send the email
-            server.sendmail(sender_email, [email], msg.as_string())
+        server.sendmail(sender_email, [email], msg.as_string())
 
         # Quit the server
         server.quit()
