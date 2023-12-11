@@ -282,7 +282,7 @@ const Schedules = () => {
             </div>
             <div className="flex justify-center items-center gap-[0.5rem]">
               <h2 className="text-[#ff007a] text-[1.2rem] font-['Cairo']">
-                Description:{" "}
+                Follow Ups:{" "}
               </h2>
               <p className="text-[1rem] font-['Cairo']">
                 {modalInfo.description}
