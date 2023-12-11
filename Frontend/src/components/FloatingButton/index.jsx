@@ -1,7 +1,7 @@
 import Fab from "@mui/material/Fab";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faMicrophone, faXmark } from "@fortawesome/free-solid-svg-icons";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Divider from "@mui/material/Divider";
@@ -80,7 +80,7 @@ const FloatingButton = () => {
   return (
     <>
       <Fab onClick={handleOpen} color="#ff007a" aria-label="add">
-        <FontAwesomeIcon icon={faPlus} />
+        <FontAwesomeIcon icon={faMicrophone} />
       </Fab>
       {/* Modal */}
       <Modal
