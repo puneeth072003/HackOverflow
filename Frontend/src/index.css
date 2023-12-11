@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -35,10 +35,20 @@ div.MuiPickersLayout-root {
 li.Mui-selected,
 li.css-1e3wlyl-MuiButtonBase-root-MuiMenuItem-root-MuiMultiSectionDigitalClockSection-item.Mui-selected,
 li.css-1e3wlyl-MuiButtonBase-root-MuiMenuItem-root-MuiMultiSectionDigitalClockSection-item.Mui-selected:focus-visible,
-li.css-1e3wlyl-MuiButtonBase-root-MuiMenuItem-root-MuiMultiSectionDigitalClockSection-item.Mui-selected:hover {
-  background-color: #ff007a;
+li.css-1e3wlyl-MuiButtonBase-root-MuiMenuItem-root-MuiMultiSectionDigitalClockSection-item.Mui-selected:hover,
+button.css-jgls56-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover,
+button.css-jgls56-MuiButtonBase-root-MuiPickersDay-root.Mui-selected,
+button.Mui-selected,
+button.Mui-selected:hover,
+button.css-1u23akw-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
+  background-color: #ff007a !important;
 }
 
 button.css-1e6y48t-MuiButtonBase-root-MuiButton-root {
-    color: #ff007a;
+  color: #ff007a;
+}
+
+span.MuiDayCalendar-weekDayLabel,
+button.MuiPickersDay-dayWithMargin {
+  color: #fff;
 }

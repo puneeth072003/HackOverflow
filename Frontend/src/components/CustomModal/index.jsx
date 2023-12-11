@@ -1,6 +1,7 @@
 import axios from "axios";
 
 // import { BACKEND_URI } from "../../config";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -28,24 +29,25 @@ const CustomModal = () => {
   // ##################################
   const navigate = useNavigate();
   const url = "http://localhost:3500/api/v1/final";
+  const [loading, setLoading] = useState(false);
   // const redirecturi = "http://localhost:5173/transcribe";
 
   const handleTransribe = async () => {
     try {
+      setLoading(true);
       const response = await axios.get(url);
       if (response.data) {
         window.summary = response.data.summary;
         window.executionTime = response.data.executionTime;
-        navigate("/transcribe");
+        handleClose();
+        setLoading(false);
+        navigate("transcript");
       }
     } catch (error) {
       console.error("Error in transcribing:", error);
     }
   };
   // ##################################
-
-  // Not Tested
-  console.log(file);
 
   const style = {
     position: "absolute",
@@ -62,11 +64,14 @@ const CustomModal = () => {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    justifyContent: "center",
     gap: "1.5rem",
     "&::before, &::after": {
       content: '""',
     },
   };
+
+  console.log(loading);
 
   return (
     <>
@@ -77,63 +82,69 @@ const CustomModal = () => {
         <FontAwesomeIcon style={{ alignSelf: "center" }} icon={faMicrochip} />
         <span className="font-['Cairo']">Transcribe</span>
       </button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <FontAwesomeIcon
-            style={{
-              position: "absolute",
-              top: 15,
-              right: 17,
-              fontSize: "1.5rem",
-              cursor: "pointer",
-            }}
-            onClick={handleClose}
-            icon={faXmark}
-          />
-          <div className="w-[100%]">
-            <h2 className="font-['Cairo'] text-[#ff007a] text-[2rem] text-center">
-              Transcribe your Meetings
-            </h2>
-            <Divider sx={{ "border-color": "#313942" }} />
-          </div>
-          <div>
-            <p className="text-center">
-              Supported Files:{" "}
-              <em className="text-[#ff007a] font-[1000]">.mp4</em>
-            </p>
-            <FileUploader
-              handleChange={handleChange}
-              name="file"
-              types={["MP4"]}
-              label=" Upload or Drop a File Right Here"
+      {loading ? (
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <CircularProgress color="secondary" />
+          </Box>
+        </Modal>
+      ) : (
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <FontAwesomeIcon
+              style={{
+                position: "absolute",
+                top: 15,
+                right: 17,
+                fontSize: "1.5rem",
+                cursor: "pointer",
+              }}
+              onClick={handleClose}
+              icon={faXmark}
             />
-          </div>
-          <div className="flex gap-[2rem]">
-            <button
-              // onClick={postData}
-              data-function="post-video"
-              className="font-['Cairo'] py-[0.5rem] text-[1rem] rounded-[14px] bg-[#FF007A] w-[7rem] mx-[auto] mb-[2rem] text-[#000]"
-            >
-              Upload
-            </button>
-            <button
-              className=" font-['Cairo'] py-[0.5rem] text-[1rem] rounded-[14px] bg-[#FF007A] w-[7rem] mx-[auto] mb-[2rem] text-[#000]"
-              onClick={handleTransribe}
-            >
-              <FontAwesomeIcon
-                style={{ alignSelf: "center" }}
-                icon={faMicrochip}
+            <div className="w-[100%]">
+              <h2 className="font-['Cairo'] text-[#ff007a] text-[2rem] text-center">
+                Transcribe your Meetings
+              </h2>
+              <Divider sx={{ "border-color": "#313942" }} />
+            </div>
+            <div>
+              <p className="text-center">
+                Supported Files:{" "}
+                <em className="text-[#ff007a] font-[1000]">.mp4</em>
+              </p>
+              <FileUploader
+                handleChange={handleChange}
+                name="file"
+                types={["MP4"]}
+                label=" Upload or Drop a File Right Here"
               />
-              <span className="font-['Cairo']">Transcribe</span>
-            </button>
-          </div>
-        </Box>
-      </Modal>
+            </div>
+            <div className="flex gap-[2rem]">
+              <button
+                className=" font-['Cairo'] py-[0.5rem] text-[1rem] rounded-[14px] bg-[#FF007A] w-[7rem] mx-[auto] mb-[2rem] text-[#000]"
+                onClick={handleTransribe}
+              >
+                <FontAwesomeIcon
+                  style={{ alignSelf: "center" }}
+                  icon={faMicrochip}
+                />
+                <span className="font-['Cairo']">Transcribe</span>
+              </button>
+            </div>
+          </Box>
+        </Modal>
+      )}
     </>
   );
 };

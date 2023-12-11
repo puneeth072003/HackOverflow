@@ -1,7 +1,7 @@
 const { google } = require('googleapis');
 require("dotenv").config();
 
-async function createEvent(accessToken, calendarId, eventSummary, eventStart, eventEnd) {
+async function createEvent(accessToken, calendarId, eventSummary, eventStart, eventEnd, eventFollowUps) {
   const oauth2Client = new google.auth.OAuth2();
   oauth2Client.setCredentials({ access_token: accessToken });
 
@@ -18,6 +18,7 @@ async function createEvent(accessToken, calendarId, eventSummary, eventStart, ev
       dateTime: eventEnd,
       timeZone: 'UTC',
     },
+    description: eventFollowUps
   };
 
   try {

@@ -23,6 +23,6 @@ router.get("/notification",getNotification);
 
 router.get("/user", getUser);
 router.get("/updateCalendar", fetchCalendarEvents);
-router.get("/write",writeEvent) //change this later to post
+router.post("/write",writeEvent) //change this later to post
 
 module.exports = router;

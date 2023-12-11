@@ -1,6 +1,6 @@
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
-// import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import dayjs from "dayjs";
 import { useEffect } from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers";
@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import axios from "axios";
 import "./style.css";
 
 import { BACKEND_URI } from "../../config";
@@ -22,18 +23,66 @@ export default function PermanentDrawer() {
   const [events, setEvents] = useState([]);
 
   const [eventsName, setEventsName] = useState([]);
+  const [eventDesc, setEventDesc] = useState([]);
 
   const [open, setOpen] = useState(false);
+
+  const [startTime, setStartTime] = useState(dayjs(new Date()));
+  const [endTime, setEndTime] = useState(dayjs(new Date()));
 
   const handleOpen = () => setOpen(true);
 
   const handleClose = () => setOpen(false);
 
+  const handleButton = async () => {
+    try {
+      const data = {
+        eventsName,
+        startTime:
+          startTime.year() +
+          "-" +
+          (startTime.month() + 1) +
+          "-" +
+          startTime.date() +
+          "T" +
+          startTime.hour() +
+          ":" +
+          startTime.minute() +
+          ":" +
+          startTime.second() +
+          "Z",
+        endTime:
+          endTime.year() +
+          "-" +
+          (endTime.month() + 1) +
+          "-" +
+          endTime.date() +
+          "T" +
+          endTime.hour() +
+          ":" +
+          endTime.minute() +
+          ":" +
+          endTime.second() +
+          "Z",
+        eventDesc,
+      };
+
+      const event = await axios
+        .post(`${BACKEND_URI}/api/v1/write`, data)
+        .then((e) => handleClose());
+
+      handleClose();
+    } catch (error) {
+      // Handle errors
+      console.error("Error:", error);
+    }
+  };
+
   const style = {
     position: "absolute",
     width: "45vw",
-    height: "70vh",
-    top: "54%",
+    height: "60vh",
+    top: "47%",
     left: "48%",
     transform: "translate(-50%, -50%)",
     bgcolor: "#17202a",
@@ -88,6 +137,31 @@ export default function PermanentDrawer() {
     },
     "& .css-bw88rr-MuiPickersMonth-monthButton.Mui-selected": {
       "background-color": "#FF007A",
+    },
+  };
+
+  const time_style = {
+    "& .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root": {
+      color: "#ff007a",
+    },
+    "& fieldset": {
+      border: "2px solid #ff007a",
+    },
+    "& fieldset:hover": {
+      border: "2px solid #ff007a",
+    },
+    "& fieldset legend span": {
+      color: "#ff007a",
+    },
+    "& label": {
+      color: "#ff007a",
+    },
+    "& .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+      {
+        border: "2px solid #ff007a",
+      },
+    "& .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-focused": {
+      color: "#ff007a",
     },
   };
 
@@ -171,7 +245,7 @@ export default function PermanentDrawer() {
             </h2>
             <Divider sx={{ "border-color": "#313942" }} />
           </div>
-          <div>
+          <div className="flex flex-col justify-center gap-[1.5rem] items-center">
             <input
               required
               value={eventsName}
@@ -183,12 +257,38 @@ export default function PermanentDrawer() {
               className="mx-[1.5rem] my-[1rem] px-[7px]"
             />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              {/* <DateTimePicker
-                label="Basic date time picker"
-                value={value}
-                onChange={(newValue) => setValue(newValue)}
-              /> */}
+              <div className="flex justify-center items-center gap-[1.5rem]">
+                <DateTimePicker
+                  sx={time_style}
+                  label="Pick Meeting Start Time"
+                  value={startTime}
+                  onChange={(newValue) => setStartTime(newValue)}
+                />
+                <DateTimePicker
+                  sx={time_style}
+                  label="Pick Meeting End Time"
+                  value={endTime}
+                  onChange={(newValue) => setEndTime(newValue)}
+                />
+              </div>
             </LocalizationProvider>
+            <input
+              required
+              value={eventDesc}
+              onChange={(event) => setEventDesc(event.target.value)}
+              type="text"
+              name="event"
+              data-function="fetch-event"
+              placeholder="Enter Event Followups..."
+              className="mx-[1.5rem] my-[1rem] px-[7px]"
+            />
+            <button
+              onClick={handleButton}
+              data-function="post-date-time"
+              className="text-[#000] font-['Cairo'] py-[0.5rem] text-[1.2rem] rounded-[14px] bg-[#FF007A] w-[10rem] mx-[auto]"
+            >
+              Create Meeting
+            </button>
           </div>
         </Box>
       </Modal>
