@@ -71,6 +71,11 @@ svg[data-testid=GoogleIcon] path {
   fill: #fff;
 }
 
+button[data-function="google-auth"]:hover span, button[data-function="google-auth"]:hover svg[data-testid=GoogleIcon] path {
+  fill: #000;
+  color: #000;
+}
+
 .video-container {
   position: fixed;
   top: 0;

@@ -73,6 +73,8 @@ export default function PermanentDrawer() {
         eventMail: mail,
       };
 
+      console.log(data)
+
       await axios
         .post(`${BACKEND_URI}/api/v1/write`, data)
         .then(() => handleClose());
