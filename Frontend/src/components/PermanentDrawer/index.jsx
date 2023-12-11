@@ -21,6 +21,7 @@ const drawerWidth = 350;
 export default function PermanentDrawer() {
   const [date, setDate] = useState(dayjs(new Date()));
   const [events, setEvents] = useState([]);
+  const [mail, setMail] = useState("");
 
   const [eventsName, setEventsName] = useState([]);
   const [eventDesc, setEventDesc] = useState([]);
@@ -36,6 +37,10 @@ export default function PermanentDrawer() {
 
   const handleButton = async () => {
     try {
+      await fetch(`${BACKEND_URI}/api/v1/user`)
+        .then((res) => res.json())
+        .then((data) => setMail(data.Email));
+
       const data = {
         eventsName,
         startTime:
@@ -65,11 +70,12 @@ export default function PermanentDrawer() {
           endTime.second() +
           "Z",
         eventDesc,
+        eventMail: mail,
       };
 
-      const event = await axios
+      await axios
         .post(`${BACKEND_URI}/api/v1/write`, data)
-        .then((e) => handleClose());
+        .then(() => handleClose());
 
       handleClose();
     } catch (error) {
