@@ -32,16 +32,25 @@ const fetchAccessToken = async (code) => {
   }
 };
 
-const writeEvent=(req,res)=>{
-  const data = req.body
+const writeEvent = (req, res) => {
+  const data = req.body;
   const accessToken = global.access_token_calendar;
-  const calendarId = 'primary'; // Use 'primary' for the primary calendar
+  const calendarId = "primary"; // Use 'primary' for the primary calendar
   const eventSummary = data.eventsName;
   const eventStart = data.startTime; // UTC time
-  const eventEnd = data.endTime ; // UTC time
-  const eventFollowUps = data.eventDesc ; // UTC time
+  const eventEnd = data.endTime; // UTC time
+  const eventFollowUps = data.eventDesc; // UTC time
+  global.email = data.eventMail;
 
-  createEvent(accessToken, calendarId, eventSummary, eventStart, eventEnd, eventFollowUps);
-}
+  createEvent(
+    accessToken,
+    calendarId,
+    eventSummary,
+    eventStart,
+    eventEnd,
+    eventFollowUps,
+    email
+  );
+};
 
-module.exports = { getHome, fetchAccessToken ,writeEvent};
+module.exports = { getHome, fetchAccessToken, writeEvent };
